@@ -39,6 +39,26 @@ class Generador:
 		self.actualizar_historico()
 		return siguiente
 
+	def ciclo(self, n, mostrar=False):
+		""" genera n números pseudoaleatorios en su historial
+			se pueden visualizar o no mientras se generan
+		"""
+		for i  in range(0, n):
+			if mostrar:
+				print(self.next())
+			else:
+				self.next()
+
+	def get_generacion(self):
+		""" devuelve un arreglo de los números pseudoaleatorios
+		generados
+		"""
+		generacion = []
+		for i in range(0, len(self.historico)):
+			generacion.append(self.historico[i][2])
+
+		return generacion
+
 
 if __name__ == '__main__':
 	gen = None
