@@ -87,12 +87,29 @@ class PruebaPromedio:
 
 
 if __name__ == '__main__':
-	generador = Generador(17)
-	generador.ciclo(65)
+	generador = Generador(3)
+	generador.ciclo(200)
 
 	prueba = PruebaPromedio(generador.get_generacion())
 	print(prueba.probar(0.05))
 	print(prueba.z0)
 	print(prueba.z_alfa_mitad)
+
+	gen = None
+	i = 0
+	prueba = None
+	seguir = True
+"""
+	while seguir:
+		gen = Generador(i)
+		gen.ciclo(300)
+		prueba = PruebaPromedio(gen.get_generacion())
+		seguir = prueba.probar(0.05)
+		if seguir == False:
+			print(i)
+		i += 1
+"""
+
+	
 
 
