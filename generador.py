@@ -5,6 +5,8 @@
 
 import sys
 
+from comun import precision
+
 class Generador:
 	def __init__(self, semilla):
 		#inician valores para el ejemplo
@@ -18,7 +20,7 @@ class Generador:
 		self.historico = []
 
 	def actualizar_historico(self):
-		self.historico.append([self.contador, self.actual, self.actual / self.modulo])
+		self.historico.append([self.contador, self.actual, round(self.actual / self.modulo, precision)])
 
 	def mostrar_historico(self):
 		print("histórico, semilla: {}".format(self.semilla))
@@ -70,8 +72,7 @@ if __name__ == '__main__':
 		gen = Generador(17)
 	else:
 		gen = Generador(int(sys.argv[1]))
-	for i in range(0, 65):
-		print(gen.next())
+	gen.ciclo(325)
 	gen.mostrar_historico()
 
 
