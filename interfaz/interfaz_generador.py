@@ -16,7 +16,7 @@ p_x_l = 10 #p_x largos
 
 
 class InterfazGenerador(Frame):
-	def __init__(self, ventana):
+	def __init__(self, ventana, generador): #todo: generador?
 		Frame.__init__(self, ventana)
 		self.master = ventana
 
