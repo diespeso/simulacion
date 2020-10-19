@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import sys
+
 from tkinter import ttk 
 from tkinter import *
 from tkinter import scrolledtext
@@ -22,6 +24,7 @@ class InterfazGenerador(Frame):
 		self.entrada_multiplicador = None
 		self.entrada_constante = None
 		self.entrada_modulo = None
+		self.entrada_ciclo = None
 		self.btn_generar = None
 		self.txt_generacion = None
 		self.init_interfaz()
@@ -53,43 +56,45 @@ class InterfazGenerador(Frame):
 
 		self.btn_generar = ttk.Button(self, text="Generar", command=self.capturar)
 		self.btn_generar.grid(
-			column = 0, row = 1, padx = p_x_l, pady = p_y)
+			column = 0, row = 2, padx = p_x_l, pady = p_y)
 
-		self.txt_generacion = scrolledtext.ScrolledText(self.master, width=120, height=50)
+		ttk.Label(self, text="Tamaño").grid(
+			column = 0, row = 1, padx = p_x_l, pady = p_y)
+		self.entrada_ciclo = ttk.Entry(self, width=15)
+		self.entrada_ciclo.grid(
+			column = 1, row = 1, padx = 0, pady = 0)
+
+		self.txt_generacion = scrolledtext.ScrolledText(self.master, width=120, height=35)
 		self.txt_generacion.grid(
-			column = 0, row = 0, padx = 10, pady= 80)
+			column = 0, row = 0, padx = 10, pady= 100)
 		
 
 		#self.pack(expand=1, fill=BOTH)
 
 
 	def capturar(self):
-		
-		pass
+		generador = None
+		ciclo = None
+		try:
+			generador = Generador(
+				int(self.entrada_multiplicador.get()),
+				int(self.entrada_constante.get()),
+				int(self.entrada_modulo.get()),
+				int(self.entrada_semilla.get())
+			)
 
-"""
-	def init_window(self):
-		self.master.title("Generador Pseudoaleatorio")
-		self.crear_tabs()
+			ciclo = int(self.entrada_ciclo.get())
 
-		self.interfaz_generador()
+		except:
+			print("No se pudo crear el generador, datos incorrectos")
+			e = sys.exc_info()[0]
+			print(e.__str__())
+		finally:
+			generador.ciclo(ciclo)
+			self.txt_generacion.insert(INSERT, generador.str_historico())
 
-		self.pack(fill=BOTH, expand=1)
+		def limpiar(self):
+			pass
 
-	def crear_tabs(self):
-		self.tab_control = ttk.Notebook(self.master)
-
-		self.tab_generador = ttk.Frame(self.tab_control)
-		self.tab_promedio = ttk.Frame(self.tab_control)
-		self.tab_frecuencia = ttk.Frame(self.tab_control)
-
-		self.tab_control.add(self.tab_generador, text="Generador")
-		self.tab_control.add(self.tab_promedio, text="Promedio")
-		self.tab_control.add(self.tab_frecuencia, text="Frecuencia")
-
-		self.tab_control.pack(fill=BOTH, expand=1)
-
-	def interfaz_generador(self):
-		ttk.Label(self.tab_generador, text="Semilla: ").grid(
-			column = 0, row = 0, padx = 10, pady = 10)
-"""
+		def reiniciar(self):
+			pass

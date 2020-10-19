@@ -12,13 +12,19 @@ TODO: el generador debe poder tomar valores para cada variable
 ya no es fase de pruebas
 """
 class Generador:
-	def __init__(self, semilla):
+	def __init__(self, multiplicador, constante, modulo, semilla):
 		#inician valores para el ejemplo
-		self.multiplicador = 101
+		"""self.multiplicador = 101
 		self.constante = 221
 		self.semilla = semilla
 		self.actual = self.semilla
 		self.modulo = 17001
+		"""
+		self.multiplicador = multiplicador
+		self.constante = constante
+		self.modulo = modulo
+		self.semilla = semilla
+		self.actual = self.semilla
 		#terminan valores para el ejemplo
 		self.contador = 0
 		self.historico = []
@@ -38,6 +44,13 @@ class Generador:
 				else:
 					print(registro[i], end='\t')
 			print("")
+
+	def str_historico(self):
+		cadena = ""
+		for registro in self.historico:
+			cadena += "{}\t{}\n".format(registro[0], registro[2])
+		return cadena
+
 	def next(self):
 		self.contador += 1
 		siguiente = (self.multiplicador * self.actual + self.constante) % self.modulo
@@ -64,6 +77,9 @@ class Generador:
 			generacion.append(self.historico[i][2])
 
 		return generacion
+
+	def detectar_ciclo(self):
+		pass #muestra donde se presenta el ciclo.
 
 
 if __name__ == '__main__':
