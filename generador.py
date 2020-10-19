@@ -7,6 +7,10 @@ import sys
 
 from comun import precision
 
+"""
+TODO: el generador debe poder tomar valores para cada variable
+ya no es fase de pruebas
+"""
 class Generador:
 	def __init__(self, semilla):
 		#inician valores para el ejemplo

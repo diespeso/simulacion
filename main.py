@@ -1,32 +1,17 @@
 #!/usr/bin/python3
 
-from tkinter import *;
-import generador as gen;
+from tkinter import *
+from tkinter import ttk
 
-def uwu():
-	print("uwu, bye")
+import generador as gen
+from interfaz.ventana import Ventana
 
-class Window(Frame):
-	def __init__(self, master=None):
-		Frame.__init__(self, master)
-		self.master = master
-		self.init_window()
 
-	def init_window(self):
-		self.master.title("Pseudoaleatorio")
-		self.pack(fill=BOTH, expand=1)
-		quitButton = Button(self, text="Quit", command=uwu)
-
-		quitButton.place(x=0, y=0)
-
-		text = Text()
-		text.insert(INSERT, "esto es un texto")
-		text.place(x=32, y=32)
 
 def main():
 	root = Tk()
-	root.geometry("400x300")
-	app = Window(root)
+	root.geometry("960x640")
+	app = Ventana(root)
 	root.mainloop()
 
 if __name__ == '__main__':

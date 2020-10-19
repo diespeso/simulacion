@@ -10,3 +10,5 @@ La secuencia generada por la semilla 3 con 200 numeros da un
 z0 = 2.69, muy por encima de límite de 1.96 para un grado de tolerancia
 alfa igual a %5
 Se podría mejorar la precisión de los límites de los intervalos en la prueba de la frecuencia
+https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/entry.html
+https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/entry.html
