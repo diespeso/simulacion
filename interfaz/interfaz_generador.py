@@ -16,6 +16,8 @@ p_x_l = 10 #p_x largos
 
 
 class InterfazGenerador(Frame):
+	#TODO: Ventana de pánico si falta algún dato,
+	# hay un try catch para esto
 	def __init__(self, ventana, generador): #todo: generador?
 		Frame.__init__(self, ventana)
 		self.master = ventana
@@ -30,26 +32,22 @@ class InterfazGenerador(Frame):
 		self.init_interfaz()
 
 	def init_interfaz(self):
-		ttk.Label(self, text="Semilla").grid(
-			column = 0, row = 0, padx = p_x_l, pady = p_y)
+		self.add_labels()
+
+		# entradas
 		self.entrada_semilla = ttk.Entry(self, width=15)
 		self.entrada_semilla.grid(
 			column = 1, row = 0, padx = 0, pady = 0)
 
-		ttk.Label(self, text="Constante").grid(
-			column = 2, row = 0, padx = p_x_l, pady = p_y)
+
 		self.entrada_constante = ttk.Entry(self, width=15)
 		self.entrada_constante.grid(
 			column= 3, row = 0, padx = 0, pady = 0)
 
-		ttk.Label(self, text="Multiplicador").grid(
-			column = 4, row = 0, padx = p_x_l, pady = p_y)
 		self.entrada_multiplicador = ttk.Entry(self, width=15)
 		self.entrada_multiplicador.grid(
 			column = 5, row = 0, padx = 0, pady = 0)
 
-		ttk.Label(self, text="Módulo").grid(
-			column = 6, row = 0, padx = p_x_l, pady = p_y)
 		self.entrada_modulo = ttk.Entry(self, width=15)
 		self.entrada_modulo.grid(
 			column = 7, row = 0, padx = 0, pady = 0)
@@ -58,8 +56,7 @@ class InterfazGenerador(Frame):
 		self.btn_generar.grid(
 			column = 0, row = 2, padx = p_x_l, pady = p_y)
 
-		ttk.Label(self, text="Tamaño").grid(
-			column = 0, row = 1, padx = p_x_l, pady = p_y)
+
 		self.entrada_ciclo = ttk.Entry(self, width=15)
 		self.entrada_ciclo.grid(
 			column = 1, row = 1, padx = 0, pady = 0)
@@ -71,8 +68,20 @@ class InterfazGenerador(Frame):
 
 		#self.pack(expand=1, fill=BOTH)
 
+	def add_labels(self):
+		ttk.Label(self, text="Semilla").grid(
+			column = 0, row = 0, padx = p_x_l, pady = p_y)
+		ttk.Label(self, text="Constante").grid(
+			column = 2, row = 0, padx = p_x_l, pady = p_y)
+		ttk.Label(self, text="Multiplicador").grid(
+			column = 4, row = 0, padx = p_x_l, pady = p_y)
+		ttk.Label(self, text="Módulo").grid(
+			column = 6, row = 0, padx = p_x_l, pady = p_y)
+		ttk.Label(self, text="Tamaño").grid(
+			column = 0, row = 1, padx = p_x_l, pady = p_y)
 
 	def capturar(self):
+		self.limpiar()
 		generador = None
 		ciclo = None
 		try:
@@ -93,8 +102,9 @@ class InterfazGenerador(Frame):
 			generador.ciclo(ciclo)
 			self.txt_generacion.insert(INSERT, generador.str_historico())
 
-		def limpiar(self):
-			pass
+	def limpiar(self):
+		self.txt_generacion.delete("1.0", END)
 
-		def reiniciar(self):
-			pass
+
+	def reiniciar(self):
+		pass

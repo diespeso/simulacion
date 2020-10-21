@@ -72,6 +72,9 @@ class Generador:
 		""" devuelve un arreglo de los números pseudoaleatorios
 		generados
 		"""
+
+		if len(self.historico) == 0:
+			raise Exception("generador vacío")
 		generacion = []
 		for i in range(0, len(self.historico)):
 			generacion.append(self.historico[i][2])
@@ -80,6 +83,13 @@ class Generador:
 
 	def detectar_ciclo(self):
 		pass #muestra donde se presenta el ciclo.
+
+	def is_vacio(self):
+		return len(self.historico) == 0
+
+	def reiniciar(self):
+		self.historico = []
+		self.contador = 0
 
 
 if __name__ == '__main__':

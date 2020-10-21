@@ -155,6 +155,7 @@ imports:
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#generador">generador</a>
  &#8226;   <a href="#heapq">heapq</a>
+ &#8226;   <a href="#interfaz.ventana">interfaz.ventana</a>
  &#8226;   <a href="#io">io</a>
  &#8226;   <a href="#keyword">keyword</a>
  &#8226;   <a href="#linecache">linecache</a>
@@ -167,6 +168,7 @@ imports:
  &#8226;   <a href="#sre_constants">sre_constants</a>
  &#8226;   <a href="#sre_parse">sre_parse</a>
  &#8226;   <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#types">types</a>
  &#8226;   <a href="#warnings">warnings</a>
@@ -1481,6 +1483,17 @@ imported by:
     <a href="#inspect">inspect</a>
  &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#types">types</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="comun"></a>
+  <a target="code" href="/home/radge/Escritorio/cosas_universidad/semestre_5/Simulaci%C3%B3n/proyecto/comun.py" type="text/plain"><tt>comun</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imported by:
+    <a href="#generador">generador</a>
 
   </div>
 
@@ -4886,8 +4899,15 @@ imported by:
   <a name="generador"></a>
   <a target="code" href="/home/radge/Escritorio/cosas_universidad/semestre_5/Simulaci%C3%B3n/proyecto/generador.py" type="text/plain"><tt>generador</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#comun">comun</a>
+ &#8226;   <a href="#sys">sys</a>
+
+  </div>
+  <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#interfaz.interfaz_generador">interfaz.interfaz_generador</a>
+ &#8226;   <a href="#main.py">main.py</a>
 
   </div>
 
@@ -5448,6 +5468,98 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="interfaz"></a>
+  <a target="code" href="-" type="text/plain"><tt>interfaz</tt></a>
+<span class="moduletype">NamespacePackage</span>  <div class="import">
+imported by:
+    <a href="#interfaz.interfaz_frecuencia">interfaz.interfaz_frecuencia</a>
+ &#8226;   <a href="#interfaz.interfaz_generador">interfaz.interfaz_generador</a>
+ &#8226;   <a href="#interfaz.interfaz_promedio">interfaz.interfaz_promedio</a>
+ &#8226;   <a href="#interfaz.ventana">interfaz.ventana</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="interfaz.interfaz_frecuencia"></a>
+  <a target="code" href="/home/radge/Escritorio/cosas_universidad/semestre_5/Simulaci%C3%B3n/proyecto/interfaz/interfaz_frecuencia.py" type="text/plain"><tt>interfaz.interfaz_frecuencia</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#interfaz">interfaz</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#interfaz.ventana">interfaz.ventana</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="interfaz.interfaz_generador"></a>
+  <a target="code" href="/home/radge/Escritorio/cosas_universidad/semestre_5/Simulaci%C3%B3n/proyecto/interfaz/interfaz_generador.py" type="text/plain"><tt>interfaz.interfaz_generador</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#generador">generador</a>
+ &#8226;   <a href="#interfaz">interfaz</a>
+ &#8226;   <a href="#interfaz.ventana">interfaz.ventana</a>
+ &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
+ &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#interfaz.ventana">interfaz.ventana</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="interfaz.interfaz_promedio"></a>
+  <a target="code" href="/home/radge/Escritorio/cosas_universidad/semestre_5/Simulaci%C3%B3n/proyecto/interfaz/interfaz_promedio.py" type="text/plain"><tt>interfaz.interfaz_promedio</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#interfaz">interfaz</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#interfaz.ventana">interfaz.ventana</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="interfaz.ventana"></a>
+  <a target="code" href="/home/radge/Escritorio/cosas_universidad/semestre_5/Simulaci%C3%B3n/proyecto/interfaz/ventana.py" type="text/plain"><tt>interfaz.ventana</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#interfaz">interfaz</a>
+ &#8226;   <a href="#interfaz.interfaz_frecuencia">interfaz.interfaz_frecuencia</a>
+ &#8226;   <a href="#interfaz.interfaz_generador">interfaz.interfaz_generador</a>
+ &#8226;   <a href="#interfaz.interfaz_promedio">interfaz.interfaz_promedio</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#interfaz.interfaz_generador">interfaz.interfaz_generador</a>
+ &#8226;   <a href="#main.py">main.py</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="io"></a>
   <a target="code" href="/usr/lib/python3.5/io.py" type="text/plain"><tt>io</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -5926,6 +6038,7 @@ imported by:
  &#8226;   <a href="#tarfile">tarfile</a>
  &#8226;   <a href="#tempfile">tempfile</a>
  &#8226;   <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
  &#8226;   <a href="#unittest.loader">unittest.loader</a>
  &#8226;   <a href="#unittest.main">unittest.main</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
@@ -6852,6 +6965,7 @@ imported by:
  &#8226;   <a href="#encodings.utf_32">encodings.utf_32</a>
  &#8226;   <a href="#enum">enum</a>
  &#8226;   <a href="#ftplib">ftplib</a>
+ &#8226;   <a href="#generador">generador</a>
  &#8226;   <a href="#getopt">getopt</a>
  &#8226;   <a href="#getpass">getpass</a>
  &#8226;   <a href="#gettext">gettext</a>
@@ -6861,6 +6975,7 @@ imported by:
  &#8226;   <a href="#importlib">importlib</a>
  &#8226;   <a href="#importlib.util">importlib.util</a>
  &#8226;   <a href="#inspect">inspect</a>
+ &#8226;   <a href="#interfaz.interfaz_generador">interfaz.interfaz_generador</a>
  &#8226;   <a href="#keyword">keyword</a>
  &#8226;   <a href="#linecache">linecache</a>
  &#8226;   <a href="#locale">locale</a>
@@ -7090,14 +7205,22 @@ imports:
  &#8226;   <a href="#re">re</a>
  &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#tkinter.constants">tkinter.constants</a>
+ &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
+ &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#warnings">warnings</a>
 
   </div>
   <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#interfaz.interfaz_frecuencia">interfaz.interfaz_frecuencia</a>
+ &#8226;   <a href="#interfaz.interfaz_generador">interfaz.interfaz_generador</a>
+ &#8226;   <a href="#interfaz.interfaz_promedio">interfaz.interfaz_promedio</a>
+ &#8226;   <a href="#interfaz.ventana">interfaz.ventana</a>
+ &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#tkinter.constants">tkinter.constants</a>
+ &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
+ &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
 
   </div>
 
@@ -7114,6 +7237,45 @@ imports:
   <div class="import">
 imported by:
     <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="tkinter.scrolledtext"></a>
+  <a target="code" href="/usr/lib/python3.5/tkinter/scrolledtext.py" type="text/plain"><tt>tkinter.scrolledtext</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.constants">tkinter.constants</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#interfaz.interfaz_generador">interfaz.interfaz_generador</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="tkinter.ttk"></a>
+  <a target="code" href="/usr/lib/python3.5/tkinter/ttk.py" type="text/plain"><tt>tkinter.ttk</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#os">os</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#interfaz.interfaz_generador">interfaz.interfaz_generador</a>
+ &#8226;   <a href="#interfaz.ventana">interfaz.ventana</a>
+ &#8226;   <a href="#main.py">main.py</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
 
   </div>
 

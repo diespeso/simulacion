@@ -65,7 +65,7 @@ class PruebaPromedio:
 		
 
 if __name__ == '__main__':
-	generador = Generador(3)
+	generador = Generador(101, 221, 17001, 17)
 	generador.ciclo(200)
 
 	generador.mostrar_historico()
