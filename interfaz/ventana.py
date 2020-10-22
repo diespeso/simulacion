@@ -7,6 +7,7 @@ from interfaz.interfaz_generador import InterfazGenerador
 from interfaz.interfaz_promedio import InterfazPromedio
 from interfaz.interfaz_frecuencia import InterfazFrecuencia
 
+
 class Ventana(Frame):
 	def __init__(self, master=None, args=None):
 		Frame.__init__(self, master)

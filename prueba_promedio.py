@@ -6,6 +6,7 @@ from normal import Normal
 from generador import Generador
 from comun import precision
 
+
 class PruebaPromedio:
 	""" la prueba del promedio toma un valor alfa que se divide
 	entre dos, que es la tolerancia de error, se busca el valor
@@ -54,7 +55,7 @@ class PruebaPromedio:
 			print("tolerancia: {}".format(self.tolerancia))
 
 
-		if punto_z0 < self.tolerancia:
+		if self.z0 < self.tolerancia:
 			return True
 		else:
 			return False
