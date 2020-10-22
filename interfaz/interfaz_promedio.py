@@ -2,6 +2,8 @@
 
 from tkinter import *
 
+from prueba_promedio import PruebaPromedio
+
 p_x = 3
 p_y = 3
 p_x_l = 10 #p_x largos
@@ -16,14 +18,17 @@ class InterfazPromedio(Frame):
 		pero no hace nada hasta que el generador ha generado
 		los números.
 	"""
-	def __init__(self, master, generador):
+	def __init__(self, master):
 		Frame.__init__(self, master)
-
-		self.init_interfaz()
 		self.entrada_promedio = None
 		self.entrada_des_estandar = None
 		self.entrada_z0 = None
 		self.entrada_alfa = None
+
+		self.prueba_promedio = None
+
+		self.init_interfaz()
+
 
 	def init_interfaz(self):
 		self.add_labels()
@@ -44,18 +49,26 @@ class InterfazPromedio(Frame):
 		self.entrada_promedio = ttk.Entry(self, width=15)
 		self.entrada_promedio.grid(
 			column = 1, row = 0, padx = 0, pady = 0)
-		self.entrada_promedio.config(state="disabled") #al final
 
 		self.entrada_des_estandar = ttk.Entry(self, width=15)
 		self.entrada_des_estandar.grid(
 			column = 3, row = 0, padx = 0, pady = 0)
-		self.entrada_des_estandar.config(state="disabled")
 
 		self.entrada_z0 = ttk.Entry(self, width=15)
 		self.entrada_z0.grid(
 			column = 5, row = 0, padx = 0, pady = 0)
-		self.entrada_z0.config(state="disabled")
 
 		self.entrada_alfa = ttk.Entry(self, width=15)
 		self.entrada_alfa.grid(
 			column = 1, row = 1, padx = 0, pady = 0)
+
+	def rellenar(self, numeros):
+		self.prueba_promedio = PruebaPromedio(numeros)
+		self.entrada_promedio.insert(0, str(self.prueba_promedio.mu))
+		self.entrada_promedio.config(state="disabled")
+
+		self.entrada_des_estandar.insert(0, str(self.prueba_promedio.sigma))
+		self.entrada_des_estandar.config(state="disabled")
+
+		self.entrada_z0.insert(0, str(self.prueba_promedio.z0))
+		self.entrada_z0.config(state="disabled")

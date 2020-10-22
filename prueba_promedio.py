@@ -15,17 +15,19 @@ class PruebaPromedio:
 		self.numeros = numeros
 		self.n = len(numeros)
 		self.normal = None
-		self.ejecutar()
 		self.z0 = None
+		self.sigma = None
 		self.z_alfa_mitad = None
 		self.tolerancia = None
+		self.ejecutar()
 
 	def ejecutar(self):
+		self.mu = self.obtener_promedio()
+		self.sigma = self.obtener_desviacion_estandar(self.mu)
+		self.z0 = abs(self.obtener_z0())
 		self.generar_normal()
 
 	def generar_normal(self):
-		self.mu = self.obtener_promedio()
-		self.sigma = self.obtener_desviacion_estandar(self.mu)
 		self.normal = Normal(self.mu, self.sigma)
 
 	def obtener_promedio(self):
@@ -44,8 +46,6 @@ class PruebaPromedio:
 	def probar(self, alfa, mostrar=False):
 		self.tolerancia = self.normal.densidad_estandar_acumulada_inversa( 1 - alfa / 2)
 		self.z_alfa_mitad = self.tolerancia
-		punto_z0 = abs( self.obtener_z0() )
-		self.z0 = punto_z0
 
 		if mostrar:
 			print("promedio: {}".format(self.mu))

@@ -3,5 +3,5 @@
 from tkinter import *
 
 class InterfazFrecuencia(Frame):
-	def __init__(self, master, generador):
+	def __init__(self, master):
 		Frame.__init__(self, master)

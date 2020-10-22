@@ -18,7 +18,7 @@ p_x_l = 10 #p_x largos
 class InterfazGenerador(Frame):
 	#TODO: Ventana de pánico si falta algún dato,
 	# hay un try catch para esto
-	def __init__(self, ventana, generador): #todo: generador?
+	def __init__(self, ventana): #todo: generador?
 		Frame.__init__(self, ventana)
 		self.master = ventana
 
@@ -29,6 +29,10 @@ class InterfazGenerador(Frame):
 		self.entrada_ciclo = None
 		self.btn_generar = None
 		self.txt_generacion = None
+
+		self.generador = None
+
+		self.is_generador_usado = False
 		self.init_interfaz()
 
 	def init_interfaz(self):
@@ -82,10 +86,9 @@ class InterfazGenerador(Frame):
 
 	def capturar(self):
 		self.limpiar()
-		generador = None
 		ciclo = None
 		try:
-			generador = Generador(
+			self.generador = Generador(
 				int(self.entrada_multiplicador.get()),
 				int(self.entrada_constante.get()),
 				int(self.entrada_modulo.get()),
@@ -99,11 +102,18 @@ class InterfazGenerador(Frame):
 			e = sys.exc_info()[0]
 			print(e.__str__())
 		finally:
-			generador.ciclo(ciclo)
+			self.generador.ciclo(ciclo)
+			self.is_generador_usado = True
+			self.insertar_generacion(self.generador)
+
+	def insertar_generacion(self, generador):
 			self.txt_generacion.insert(INSERT, generador.str_historico())
 
 	def limpiar(self):
 		self.txt_generacion.delete("1.0", END)
+
+	def get_is_generador_usado(self):
+		return self.is_generador_usado
 
 
 	def reiniciar(self):
