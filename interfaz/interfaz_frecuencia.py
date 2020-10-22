@@ -23,4 +23,4 @@ class InterfazFrecuencia(Frame):
 			column = 0, row = 1, padx = p_x_l, pady = p_y)
 
 	def add_entradas(self):
-		
+		pass
