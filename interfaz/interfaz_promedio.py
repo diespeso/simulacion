@@ -62,13 +62,34 @@ class InterfazPromedio(Frame):
 		self.entrada_alfa.grid(
 			column = 1, row = 1, padx = 0, pady = 0)
 
+	def abrir_entradas(self):
+		self.entrada_promedio.config(state="enabled")
+		self.entrada_des_estandar.config(state="enabled")
+		self.entrada_z0.config(state="enabled")
+
+	def cerrar_entradas(self):
+		self.entrada_promedio.config(state="disabled")
+		self.entrada_des_estandar.config(state="disabled")
+		self.entrada_z0.config(state="disabled")
+
+	def reiniciar(self):
+		""" borra los datos de todos los campos autogenerados
+		"""
+		self.abrir_entradas()
+		self.entrada_promedio.delete(0, END);
+		self.entrada_des_estandar.delete(0, END);
+		self.entrada_z0.delete(0, END);
+
 	def rellenar(self, numeros):
+		""" toma una generación de números y crear una prueba
+		de promedio, pero no la corre, solo rellena la interfaz
+		con los datos
+		"""
+		self.reiniciar()
 		self.prueba_promedio = PruebaPromedio(numeros)
 		self.entrada_promedio.insert(0, str(self.prueba_promedio.mu))
-		self.entrada_promedio.config(state="disabled")
 
 		self.entrada_des_estandar.insert(0, str(self.prueba_promedio.sigma))
-		self.entrada_des_estandar.config(state="disabled")
 
 		self.entrada_z0.insert(0, str(self.prueba_promedio.z0))
-		self.entrada_z0.config(state="disabled")
+		self.cerrar_entradas()

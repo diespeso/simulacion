@@ -29,8 +29,8 @@ class InterfazGenerador(Frame):
 		self.entrada_ciclo = None
 		self.btn_generar = None
 		self.txt_generacion = None
-
 		self.generador = None
+		self.is_auto_run = False		
 
 		self.is_generador_usado = False
 		self.init_interfaz()
@@ -106,6 +106,17 @@ class InterfazGenerador(Frame):
 			self.is_generador_usado = True
 			self.insertar_generacion(self.generador)
 
+	def auto_run(self, datos):
+		self.is_auto_run = True
+		self.is_generador_usado = True
+		self.generador = Generador(
+			datos["multiplicador"],
+			datos["constante"],
+			datos["modulo"],
+			datos["semilla"])
+		self.generador.ciclo(datos["tamano"])
+		self.insertar_generacion(self.generador)
+
 	def insertar_generacion(self, generador):
 			self.txt_generacion.insert(INSERT, generador.str_historico())
 
@@ -115,6 +126,8 @@ class InterfazGenerador(Frame):
 	def get_is_generador_usado(self):
 		return self.is_generador_usado
 
+	def get_is_auto_run(self):
+		return self.is_auto_run
 
 	def reiniciar(self):
 		pass
