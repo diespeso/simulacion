@@ -44,7 +44,7 @@ class Ventana(Frame):
 		self.tab_promedio.rellenar(self.tab_generador.generador.get_generacion())
 
 	def rellenar_tab_frecuencia(self):
-		pass
+		self.tab_frecuencia.rellenar(self.tab_generador.generador.get_generacion())
 
 	def crear_tabs(self):
 		self.tab_control = ttk.Notebook(self)
