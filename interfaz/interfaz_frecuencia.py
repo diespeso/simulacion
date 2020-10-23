@@ -9,7 +9,7 @@ p_y = 3
 p_x_l = 10 #p_x largos
 p_y_l = 10
 
-class GeneradorIntervalos:
+class GeneradorResultados:
 	def __init__(self, master, row, prueba):
 		self.contador = 0
 		self.master = master
@@ -18,6 +18,10 @@ class GeneradorIntervalos:
 		self.prueba_frecuencia = prueba
 		self.labels = []
 		self.entries = []
+
+		self.entry_chi = None
+		self.entry_tolerancia = None
+		self.entry_conclusion = None
 	
 	def dibujar_intervalos(self):
 		""" incluye en el master todos los intervalo
@@ -59,10 +63,47 @@ class GeneradorIntervalos:
 
 		self.row += 1
 
-	def add_resultados(self):
-		pass
+	def add_resultados(self, resultado):
+		self.add_interfaz_resultados()
+
+		self.entry_chi.insert(0, str(self.prueba_frecuencia.x_chi))
+		#self.entry_chi.config(state="disabled")
+
+		self.entry_tolerancia.insert(0, str(self.prueba_frecuencia.tolerancia))
+		#self.entry_tolerancia.config(state="disabled")
+
+		if resultado: #distribuidos uniformemente
+			self.entry_conclusion.insert(0, str("Los números están distribuidos uniformemente"))
+		else:
+			self.entry_conclusion.insert(0, str("Los números no están distribuidos uniformemente"))
 
 
+	def add_interfaz_resultados(self):
+		lbl_chi = ttk.Label(self.master, text="Chi cuadrada")
+		self.labels.append(lbl_chi)
+		lbl_chi.grid(column=0, row = self.row, padx = p_x_l, pady = p_y)
+		
+		self.entry_chi = ttk.Entry(self.master, width=15)
+		self.entries.append(self.entry_chi)
+		self.entry_chi.grid(column = 1, row = self.row, padx = p_x_l, pady = p_y)
+
+		lbl_tolerancia = ttk.Label(self.master, text="Tolerancia")
+		self.labels.append(lbl_tolerancia)
+		lbl_tolerancia.grid(column=0, row = self.row + 1, padx = p_x_l, pady = p_y)
+
+		self.entry_tolerancia = ttk.Entry(self.master, width=15)
+		self.entries.append(self.entry_tolerancia)
+		self.entry_tolerancia.grid(column = 1, row = self.row + 1, padx = p_x_l, pady = p_y)
+
+		lbl_conclusion = ttk.Label(self.master, text="Conclusión: ")
+		self.labels.append(lbl_conclusion)
+		lbl_conclusion.grid(column = 0, row = self.row + 2, padx = p_x_l, pady = p_y)
+
+		self.entry_conclusion = ttk.Entry(self.master, width=45)
+		self.entries.append(self.entry_conclusion)
+		self.entry_conclusion.grid(
+			column = 1, row= self.row + 2, padx = p_x_l, pady = p_y,
+			columnspan = 3)
 
 class InterfazFrecuencia(Frame):
 	def __init__(self, master):
@@ -75,7 +116,7 @@ class InterfazFrecuencia(Frame):
 		self.btn_probar = None
 
 
-		self.generador_intervalo = None
+		self.generador_resultados = None
 
 		self.fila_resultados = None
 
@@ -142,8 +183,15 @@ class InterfazFrecuencia(Frame):
 		self.entrada_tam_intervalo.delete(0, END)
 		self.cerrar_entradas()
 
+	def borrar_conclusiones(self):
+		if self.generador_resultados:
+			self.generador_resultados.__del__()
+			self.generador_resultados = None
+
+
 	def rellenar(self, numeros):
 		self.reiniciar()
+		self.borrar_conclusiones()
 		self.abrir_entradas()
 		self.prueba_frecuencia = PruebaFrecuencia(numeros)
 		self.entrada_tamano.insert(0, str(len(numeros)))	
@@ -158,8 +206,9 @@ class InterfazFrecuencia(Frame):
 		resultado = self.prueba_frecuencia.probar(alfa, n_intervalos)
 		self.entrada_tam_intervalo.insert(0, str(self.prueba_frecuencia.tam_intervalo))
 		
-		self.generador_intervalo = GeneradorIntervalos(
+		self.generador_resultados = GeneradorResultados(
 			self, 5, self.prueba_frecuencia)
-		self.fila_resultados = self.generador_intervalo.dibujar_intervalos()
-		self.generador_intervalo.add_resultados()
+		self.fila_resultados = self.generador_resultados.dibujar_intervalos()
+		self.generador_resultados.add_resultados(resultado)
+
 		self.cerrar_entradas()
