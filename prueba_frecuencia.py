@@ -21,18 +21,17 @@ class PruebaFrecuencia:
 	"""
 	debe ser posible elegir el número de intervalos
 	"""
-	def __init__(self, numeros, n_intervalos):
+	def __init__(self, numeros):
 		""" 
 		numeros: arreglo de números a probar
-		intervalos: define en cuantos intervalos se va a 
-		separar la prueba
 		"""
-		self.n_intervalos = n_intervalos
+		self.n_intervalos = None
+		self.intervalos = None
 		self.numeros = numeros
 		self.n = len(numeros)
-		self.frecuencia_esperada = round(self.n / self.n_intervalos, precision)
+		self.frecuencia_esperada = None
+		self.tam_intervalo = None
 
-		self.intervalos = self.generar_intervalos()
 		self.x_chi = None
 		self.alfa = None
 		self.tolerancia = None
@@ -63,7 +62,12 @@ class PruebaFrecuencia:
 		for intervalo in self.intervalos:
 			print(intervalo)
 
-	def probar(self, alfa, mostrar=False):
+	#probar con alfa e intervalos 
+	def probar(self, alfa, n_intervalos, mostrar=False):
+		self.n_intervalos = n_intervalos
+		self.frecuencia_esperada = round(self.n / self.n_intervalos, precision)
+		self.intervalos = self.generar_intervalos()
+		self.tam_intervalo = round(1 / self.n_intervalos, precision)
 		self.generar_frecuencia_observada()
 		self.alfa = alfa
 		# se debe de tomar desde la izquierda, por lo que es el complemento de alfa
@@ -89,9 +93,9 @@ class PruebaFrecuencia:
 		self.x_chi = round(acumulador / self.frecuencia_esperada, precision)
 
 if __name__ == '__main__':
-	gen = Generador(3)
-	gen.ciclo(200)
+	gen = Generador(101, 221, 17001, 17)
+	gen.ciclo(65)
 
-	prueba = PruebaFrecuencia(gen.get_generacion(), 4)
-	print(prueba.probar(0.05, mostrar=True))
+	prueba = PruebaFrecuencia(gen.get_generacion())
+	print(prueba.probar(0.05, 4, mostrar=True))
 	
