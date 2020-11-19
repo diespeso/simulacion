@@ -5,10 +5,12 @@ import sys
 from tkinter import ttk 
 from tkinter import *
 from tkinter import scrolledtext
+from tkinter import messagebox
 
 from interfaz.ventana import *
 
 from generador import Generador
+from generador import AnalizadorGenerador
 
 p_x = 3
 p_y = 3
@@ -85,6 +87,7 @@ class InterfazGenerador(Frame):
 			column = 0, row = 1, padx = p_x_l, pady = p_y)
 
 	def capturar(self):
+		#Se activa al presionar el botón de generar
 		self.limpiar()
 		ciclo = None
 		try:
@@ -104,6 +107,16 @@ class InterfazGenerador(Frame):
 		finally:
 			self.generador.ciclo(ciclo)
 			self.is_generador_usado = True
+			#analizar en busca del periodo
+			analizador = AnalizadorGenerador()
+			analisis = analizador.analizar(self.generador)
+			str_analisis ="La longitud del periodo para estos datos es de {},\nsi aún así deseas continuar ignora este mensaje".format(
+				analisis[0])
+			messagebox.showwarning("Advertencia de periodo", str_analisis)
+
+
+			print(analisis)
+
 			self.insertar_generacion(self.generador)
 
 	def auto_run(self, datos):
