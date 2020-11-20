@@ -113,10 +113,12 @@ class InterfazGenerador(Frame):
 
 			#analizar en busca del periodo
 			resultado_analisis = self.analizar_periodo()
+			analisis_periodo =None
 			if resultado_analisis[0]: #si hay periodo, notificar al usuario
 				messagebox.showwarning("Advertencia de periodo", resultado_analisis[1])
-
-			self.insertar_generacion(self.generador)
+				analisis_periodo = resultado_analisis[2]
+			self.insertar_generacion(self.generador, datos_periodo=analisis_periodo)
+			
 
 	def auto_run(self, datos):
 		"""Sólo util cuando se corre el programa standalone,
@@ -132,11 +134,38 @@ class InterfazGenerador(Frame):
 		self.generador.ciclo(datos["tamano"])
 		self.insertar_generacion(self.generador)
 
-	def insertar_generacion(self, generador):
+	def insertar_generacion(self, generador, datos_periodo=None):
 		"""Inserta todos los datos de la generación de un generador
 		en el campo de números generados
+
+		Si hay datos_periodo, entonces colorear los números del periodo.
 		"""
-			self.txt_generacion.insert(INSERT, generador.str_historico())
+		contador_periodo = 0
+		registros = generador.get_historico()
+		for i in range(len(generador.get_historico())):
+			registro = registros[i]
+			if datos_periodo:
+				if contador_periodo < datos_periodo[0]:
+					self.txt_generacion.insert(INSERT,
+						"{}\t{:5.5f}\n".format(registro[0], registro[2]),
+						"periodo"
+					)
+					contador_periodo += 1;
+					continue
+			self.txt_generacion.insert(INSERT,
+				"{}\t{:5.5f}\n".format(registro[0], registro[2])
+			)
+		self.txt_generacion.tag_config("periodo", foreground="red")
+
+
+
+
+		"""for registro in generador.get_historico():
+			self.txt_generacion.insert(
+				INSERT, "{}\t{:5.5f}\n".format(registro[0], registro[2])
+			)"""
+
+			#self.txt_generacion.insert(INSERT, generador.str_historico())
 
 	def limpiar(self):
 		"""Limpia el campo de números generados"""
@@ -147,7 +176,7 @@ class InterfazGenerador(Frame):
 			Usa una analizadorGenerador para encontrar
 			el periodo
 
-			Returns: (bool, str): flag de si encontró periodo,
+			Returns: (bool, str, [int, int]): flag de si encontró periodo,
 				Una cadena de texto con un mensaje sobre el resultado del analisis
 		"""
 		analizador = AnalizadorGenerador()
@@ -160,7 +189,7 @@ class InterfazGenerador(Frame):
 			flag = False
 		else:
 			flag = True
-		return (flag, str_analisis)
+		return (flag, str_analisis, analisis)
 
 	def get_is_generador_usado(self):
 		return self.is_generador_usado
