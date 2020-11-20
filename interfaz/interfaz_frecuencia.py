@@ -113,6 +113,7 @@ class InterfazFrecuencia(Frame):
 		self.entrada_tamano = None
 		self.entrada_n_intervalos = None
 		self.entrada_tam_intervalo = None
+		self.entrada_f_esperada = None
 		self.entrada_alfa = None
 		self.btn_probar = None
 
@@ -138,6 +139,8 @@ class InterfazFrecuencia(Frame):
 			column = 0, row = 0, padx = p_x_l, pady = p_y)
 		ttk.Label(self, text="Intervalos").grid(
 			column = 2, row = 0, padx = p_x_l, pady = p_y)
+		ttk.Label(self, text="F. Esperada").grid(
+			column = 2, row = 1, padx = p_x_l, pady = p_y + 10)
 
 		ttk.Label(self, text="Tamaño de intervalo").grid(
 			column = 4, row = 0, padx = p_x_l, pady = p_y)
@@ -147,6 +150,8 @@ class InterfazFrecuencia(Frame):
 
 		ttk.Label(self, text="Intervalos:").grid(
 			column = 0, row = 3, padx = p_x_l, pady = p_y + 10)
+
+
 
 	def add_entradas(self):
 		self.entrada_tamano = ttk.Entry(self, width=15)
@@ -165,18 +170,25 @@ class InterfazFrecuencia(Frame):
 		self.entrada_alfa.grid(
 			column = 1, row = 1, padx = p_x_l, pady = p_y)
 
+		self.entrada_f_esperada = ttk.Entry(self, width=15)
+		self.entrada_f_esperada.grid(
+			column = 3, row = 1, padx = p_x_l, pady = p_y)
+
 	def abrir_entradas(self):
 		self.entrada_tamano.config(state="enabled")
 		self.entrada_tam_intervalo.config(state="enabled")
+		self.entrada_f_esperada.config(state="enabled")
 
 	def cerrar_entradas(self):
 		self.entrada_tamano.config(state="disabled")
 		self.entrada_tam_intervalo.config(state="disabled")
+		self.entrada_f_esperada.config(state="disabled")
 
 	def reiniciar(self):
 		self.abrir_entradas()
 		self.entrada_tamano.delete(0, END)
 		self.entrada_tam_intervalo.delete(0, END)
+		self.entrada_f_esperada.delete(0, END)
 		self.cerrar_entradas()
 
 	def reiniciar_temporales(self):
@@ -206,6 +218,7 @@ class InterfazFrecuencia(Frame):
 
 		resultado = self.prueba_frecuencia.probar(alfa, n_intervalos)
 		self.entrada_tam_intervalo.insert(0, str(self.prueba_frecuencia.tam_intervalo))
+		self.entrada_f_esperada.insert(0, str(self.prueba_frecuencia.frecuencia_esperada))
 		
 		self.generador_resultados = GeneradorResultados(
 			self, 5, self.prueba_frecuencia)
