@@ -73,6 +73,9 @@ class Generador:
 			cadena += "{}\t{:5.5f}\n".format(registro[0], registro[2])
 		return cadena
 
+	def get_historico(self):
+		return self.historico
+
 	def next(self):
 		self.contador += 1
 		siguiente = (self.multiplicador * self.actual + self.constante) % self.modulo

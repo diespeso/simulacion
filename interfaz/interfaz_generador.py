@@ -18,6 +18,8 @@ p_x_l = 10 #p_x largos
 
 
 class InterfazGenerador(Frame):
+	""" Tab gráfica donde se generan números pseudoaleatorios"""
+	
 	#TODO: Ventana de pánico si falta algún dato,
 	# hay un try catch para esto
 	def __init__(self, ventana): #todo: generador?
@@ -38,6 +40,7 @@ class InterfazGenerador(Frame):
 		self.init_interfaz()
 
 	def init_interfaz(self):
+		""" Pone todos los elementos gráficos en su lugar"""
 		self.add_labels()
 
 		# entradas
@@ -70,11 +73,9 @@ class InterfazGenerador(Frame):
 		self.txt_generacion = scrolledtext.ScrolledText(self.master, width=120, height=35)
 		self.txt_generacion.grid(
 			column = 0, row = 0, padx = 10, pady= 100)
-		
-
-		#self.pack(expand=1, fill=BOTH)
 
 	def add_labels(self):
+		"""Añade labels a la interfaz gráfica"""
 		ttk.Label(self, text="Semilla").grid(
 			column = 0, row = 0, padx = p_x_l, pady = p_y)
 		ttk.Label(self, text="Constante").grid(
@@ -87,7 +88,9 @@ class InterfazGenerador(Frame):
 			column = 0, row = 1, padx = p_x_l, pady = p_y)
 
 	def capturar(self):
-		#Se activa al presionar el botón de generar
+		"""Se activa al presionar el botón de generar
+			Provoca que se llene el apartado de números generados
+		"""
 		self.limpiar()
 		ciclo = None
 		try:
@@ -107,19 +110,18 @@ class InterfazGenerador(Frame):
 		finally:
 			self.generador.ciclo(ciclo)
 			self.is_generador_usado = True
+
 			#analizar en busca del periodo
-			analizador = AnalizadorGenerador()
-			analisis = analizador.analizar(self.generador)
-			str_analisis ="La longitud del periodo para estos datos es de {},\nsi aún así deseas continuar ignora este mensaje".format(
-				analisis[0])
-			messagebox.showwarning("Advertencia de periodo", str_analisis)
-
-
-			print(analisis)
+			resultado_analisis = self.analizar_periodo()
+			if resultado_analisis[0]: #si hay periodo, notificar al usuario
+				messagebox.showwarning("Advertencia de periodo", resultado_analisis[1])
 
 			self.insertar_generacion(self.generador)
 
 	def auto_run(self, datos):
+		"""Sólo util cuando se corre el programa standalone,
+		genera números sin tener que llenar campos manualmente
+		"""
 		self.is_auto_run = True
 		self.is_generador_usado = True
 		self.generador = Generador(
@@ -131,10 +133,34 @@ class InterfazGenerador(Frame):
 		self.insertar_generacion(self.generador)
 
 	def insertar_generacion(self, generador):
+		"""Inserta todos los datos de la generación de un generador
+		en el campo de números generados
+		"""
 			self.txt_generacion.insert(INSERT, generador.str_historico())
 
 	def limpiar(self):
+		"""Limpia el campo de números generados"""
 		self.txt_generacion.delete("1.0", END)
+
+	def analizar_periodo(self):
+		"""
+			Usa una analizadorGenerador para encontrar
+			el periodo
+
+			Returns: (bool, str): flag de si encontró periodo,
+				Una cadena de texto con un mensaje sobre el resultado del analisis
+		"""
+		analizador = AnalizadorGenerador()
+		analisis = analizador.analizar(self.generador)
+		str_analisis = "La longituddel periodo de los números a generar es de {}\nSi aún así deseas continuar, ignora este mensaje.".format(
+			analisis[0])
+		flag = False
+		#si es -1, no hay periodo
+		if analisis[0] == -1:
+			flag = False
+		else:
+			flag = True
+		return (flag, str_analisis)
 
 	def get_is_generador_usado(self):
 		return self.is_generador_usado
