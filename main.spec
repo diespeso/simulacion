@@ -4,10 +4,10 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\edgar\\Desktop\\Tecnológico\\simulacion'],
+             pathex=['/home/radge/Escritorio/cosas_universidad/semestre_5/Simulación/proyecto'],
              binaries=[],
              datas=[],
-             hiddenimports=[],
+             hiddenimports=['tkinter'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],

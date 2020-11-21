@@ -194,6 +194,7 @@ class InterfazFrecuencia(Frame):
 	def reiniciar_temporales(self):
 		self.abrir_entradas()
 		self.entrada_tam_intervalo.delete(0, END)
+		self.entrada_f_esperada.delete(0, END)
 		self.cerrar_entradas()
 
 	def borrar_conclusiones(self):
@@ -219,7 +220,7 @@ class InterfazFrecuencia(Frame):
 		resultado = self.prueba_frecuencia.probar(alfa, n_intervalos)
 		self.entrada_tam_intervalo.insert(0, str(self.prueba_frecuencia.tam_intervalo))
 		self.entrada_f_esperada.insert(0, str(self.prueba_frecuencia.frecuencia_esperada))
-		
+
 		self.generador_resultados = GeneradorResultados(
 			self, 5, self.prueba_frecuencia)
 		self.fila_resultados = self.generador_resultados.dibujar_intervalos()
