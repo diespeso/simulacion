@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#!/usr/bin/python3
 
 ### modulo de generación de números pseudo-aleatorios
 ### usando método congruencial mixto
