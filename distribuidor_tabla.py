@@ -1,5 +1,7 @@
 precision = 3
 
+import sys
+
 class DistribuidorDeTabla:
 	"""Representa una tabla de distribución de probabilidad
 	empírica
@@ -20,6 +22,23 @@ class DistribuidorDeTabla:
 			self.relacion = self.crear_relacion()
 		except Exception as e:
 			print(e.__str__())
+			sys.exit(0)
+
+	def mostrar(self, distribucion=False):
+		salida = ""
+		for i in range(0, len(self.eventos)):
+			salida += str(self.eventos[i])
+			salida += " -> "
+			if distribucion:
+				salida += str(self.relaciones[i][0])
+				salida += ", "
+				salida += str(self.relaciones[i][1])
+			else:
+				salida += str(self.probabilidades[i + 1])
+				# + 1 porque probabilidades empieza en 0.0 para hacer las relaciones
+				pass
+			print(salida)
+			salida = ""
 		
 
 	def crear_conjuntos(self, distribucion):
@@ -85,6 +104,7 @@ class DistribuidorDeTabla:
 
 
 	def revisar_relaciones(self):
+		print(self.relaciones[-1][1])
 		if self.relaciones[-1][1] != 1.0:
 			raise Exception("La distribución de probabilidades no suma 1.0")
 

@@ -6,6 +6,7 @@ from tkinter import *
 from interfaz.interfaz_generador import InterfazGenerador
 from interfaz.interfaz_promedio import InterfazPromedio
 from interfaz.interfaz_frecuencia import InterfazFrecuencia
+from interfaz.interfaz_app_inventario import InterfazAppInventario
 
 
 class Ventana(Frame):
@@ -16,6 +17,7 @@ class Ventana(Frame):
 		self.tab_generador = None
 		self.tab_promedio = None
 		self.tab_frecuencia = None
+		self.tab_inventario = None
 		self.init_window()
 		self.tab_control.bind("<<NotebookTabChanged>>", self.configure_tab_control)
 		if args:
@@ -54,10 +56,12 @@ class Ventana(Frame):
 		self.tab_generador = InterfazGenerador(self.tab_control)
 		self.tab_promedio = InterfazPromedio(self.tab_control)
 		self.tab_frecuencia = InterfazFrecuencia(self.tab_control)
+		self.tab_inventario = InterfazAppInventario(self.tab_control)
 
 		self.tab_control.add(self.tab_generador, text="Generador")
 		self.tab_control.add(self.tab_promedio, text="Prueba Promedio")
 		self.tab_control.add(self.tab_frecuencia, text="Prueba Frecuencia")
+		self.tab_control.add(self.tab_inventario, text="Inventarios")
 		self.tab_control.grid(column= 1, row = 1)
 		#self.tab_control.pack(expand=1, fill=BOTH)
 

@@ -1,9 +1,12 @@
 #!/usr/bin/python3.9
 precision = 3
 
+import sys
+
 from generador import Generador
 
 from distribuidor_tabla import DistribuidorDeTabla
+from parser_tablas import leer_archivo
 
 def numero_a_mes(num):
 	if num == 0:
@@ -268,9 +271,10 @@ class SimInventario:
 		return round(total, 2)
 
 
+def main():
+	probabilidades = leer_archivo("demanda")
 
-if __name__ == '__main__':
-	probabilidades = """0.01 35
+	"""0.01 35
 0.015 36
 0.020 37
 0.020 38
@@ -297,7 +301,9 @@ if __name__ == '__main__':
 0.015 59
 0.005 60"""
 
-	factores = """1.2
+	factores = leer_archivo("factores")
+
+	"""1.2
 1.0
 0.9
 0.8
@@ -310,7 +316,8 @@ if __name__ == '__main__':
 1.3
 1.4"""
 
-	p_entregas = """0.3 1
+	p_entregas = leer_archivo("espera")
+	"""0.3 1
 0.4 2
 0.3 3"""
 	
@@ -344,3 +351,6 @@ if __name__ == '__main__':
 	print("Costo total: ", inv2.obtener_costo(25, 50, 26))
 
 
+
+if __name__ == '__main__':
+	main()
