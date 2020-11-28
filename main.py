@@ -8,9 +8,7 @@ import sys
 import generador as gen
 from interfaz.ventana import Ventana
 
-
 def main():
-
 	datos = None
 	if len(sys.argv) > 1:
 		datos = {}

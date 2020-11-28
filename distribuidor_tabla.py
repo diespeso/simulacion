@@ -37,7 +37,6 @@ class DistribuidorDeTabla:
 				salida += str(self.probabilidades[i + 1])
 				# + 1 porque probabilidades empieza en 0.0 para hacer las relaciones
 				pass
-			print(salida)
 			salida = ""
 		
 
@@ -104,7 +103,6 @@ class DistribuidorDeTabla:
 
 
 	def revisar_relaciones(self):
-		print(self.relaciones[-1][1])
 		if self.relaciones[-1][1] != 1.0:
 			raise Exception("La distribución de probabilidades no suma 1.0")
 

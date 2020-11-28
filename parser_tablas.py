@@ -30,7 +30,6 @@ def parse_file(nombre_archivo, distribucion=False, decimal=False):
 			arreglo = []
 			for num in contenido:
 				if decimal:
-					print(num)
 					arreglo.append(float(num))
 				else:
 					arreglo.append(int(num))

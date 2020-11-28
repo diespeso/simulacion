@@ -10,29 +10,29 @@ from parser_tablas import leer_archivo
 
 def numero_a_mes(num):
 	if num == 0:
-		return "enero"
+		return "ENE"
 	elif num == 1:
-		return "febrero"
+		return "FEB"
 	elif num == 2:
-		return "marzo"
+		return "MAR"
 	elif num == 3:
-		return "abril"
+		return "ABR"
 	elif num == 4:
-		return "mayo"
+		return "MAY"
 	elif num == 5:
-		return "junio"
+		return "JUN"
 	elif num == 6:
-		return "julio"
+		return "JUL"
 	elif num == 7:
-		return "agosto"
+		return "AGO"
 	elif num == 8:
-		return "sept"
+		return "SEP"
 	elif num == 9:
-		return "octu"
+		return "OCT"
 	elif num == 10:
-		return "novi"
+		return "NOV"
 	elif num == 11:
-		return "dici"
+		return "DIC"
 
 
 
@@ -94,6 +94,8 @@ class SimInventario:
 		self.pedido_actual = 0
 		self.contador_pedidos = 0
 
+		self.is_simulado = False
+
 		self.registro = ""
 
 	def procesar_factores_estacionales(self, str_factores):
@@ -151,7 +153,7 @@ class SimInventario:
 		self.registro += str(dato)
 		self.registro += "\t"
 
-	def simular(self):
+	def simular(self, verbose=False):
 		"""Simula un mes de inventario.
 		Se toma el siguiente número pseudoaleatorio
 		se crea un evento de demanda usando ese numero (simular_demanda)
@@ -165,6 +167,7 @@ class SimInventario:
 		#print(self.contador_meses)
 
 		#revisar si se puede recibir pedido
+		self.registro = ""
 		entrega = None
 		if self.pedido_actual:
 			entrega = self.pedido_actual.intentar_entregar()
@@ -181,17 +184,21 @@ class SimInventario:
 				self.actual -= self.deuda
 				self.deuda = 0
 		
+		self.add_registro(self.contador_meses)
 
 		#print(numero_a_mes(self.i_mes)) #porque enero es 0
 		self.add_registro(numero_a_mes(self.i_mes))
 		#print(self.actual)
 		self.add_registro(self.actual)
+
 		pseudo = self.next_pseudo()
 		#print(pseudo)
-		self.add_registro(pseudo)
+		if verbose:
+			self.add_registro(pseudo)
 		demanda = self.simular_demanda(pseudo)
 		#print("demanda", demanda)
-		self.add_registro(demanda)
+		if verbose:
+			self.add_registro(demanda)
 
 		#no se hace +1 porque inicia en 0: enero
 		d_ajus = int(round(demanda * self.factores_estacionales[self.i_mes], 0))
@@ -210,6 +217,8 @@ class SimInventario:
 			inv_final = self.actual - d_ajus
 		self.deuda += self.faltante_actual
 		self.acumulador_faltante += self.faltante_actual
+
+		self.add_registro(inv_final)
 
 		#print("faltante", self.faltante_actual)
 		self.add_registro(self.faltante_actual)
@@ -251,8 +260,11 @@ class SimInventario:
 		if self.i_mes + 1 == 13:
 			self.i_mes = 0 #vuelve a enero luego de diciembre
 
-		print(self.registro)
-		self.registro = ""
+		#print(self.registro)
+
+		if not self.is_simulado:
+			self.is_simulado = True
+		return self.registro
 
 	def ciclo(self, n):
 		"""Simula n veces
@@ -267,7 +279,6 @@ class SimInventario:
 		total = self.acumulador_faltante * c_faltante
 		total += self.contador_pedidos * c_orden
 		total += (self.acumulador_inventario * c_inventario) / 12 # anual
-
 		return round(total, 2)
 
 

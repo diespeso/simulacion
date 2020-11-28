@@ -93,21 +93,18 @@ class InterfazGenerador(Frame):
 		"""
 		self.limpiar()
 		ciclo = None
-		try:
+		captura = self.validar_entradas()
+
+		if captura:
 			self.generador = Generador(
-				int(self.entrada_multiplicador.get()),
-				int(self.entrada_constante.get()),
-				int(self.entrada_modulo.get()),
-				int(self.entrada_semilla.get())
+				captura["multiplicador"],
+				captura["constante"],
+				captura["modulo"],
+				captura["semilla"]
 			)
 
-			ciclo = int(self.entrada_ciclo.get())
+			ciclo = captura["ciclo"]
 
-		except:
-			print("No se pudo crear el generador, datos incorrectos")
-			e = sys.exc_info()[0]
-			print(e.__str__())
-		finally:
 			self.generador.ciclo(ciclo)
 			self.is_generador_usado = True
 
@@ -119,6 +116,27 @@ class InterfazGenerador(Frame):
 				analisis_periodo = resultado_analisis[2]
 			self.insertar_generacion(self.generador, datos_periodo=analisis_periodo)
 			
+	def validar_entradas(self):
+		"""Valida que las entradas sean las correctas
+			regresa un diccionario con las capturas
+		"""
+		captura = {}
+		try:
+			captura["multiplicador"] = int(self.entrada_multiplicador.get())
+			captura["constante"] = int(self.entrada_constante.get())
+			captura["modulo"] = int(self.entrada_modulo.get())
+			captura["semilla"] = int(self.entrada_semilla.get())
+			captura["ciclo"] = int(self.entrada_ciclo.get())
+
+			if (captura["multiplicador"] <= 0 or captura["constante"] <= 0 or
+				captura["semilla"] < 0 or captura["modulo"] <= 0
+				or captura["ciclo"] <= 0):
+				raise Exception("No pueden ser 0s")
+		except Exception as e:
+			messagebox.showwarning(message= "Error en los datos de entrada", title="Entrada inválida")
+			self.generador = None
+			return None
+		return captura
 
 	def auto_run(self, datos):
 		"""Sólo util cuando se corre el programa standalone,

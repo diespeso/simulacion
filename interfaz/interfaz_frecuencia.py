@@ -2,8 +2,11 @@
 
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 from prueba_frecuencia import PruebaFrecuencia
+from exceptions import BadAlfaException
+
 
 p_x = 3
 p_y = 3
@@ -212,18 +215,36 @@ class InterfazFrecuencia(Frame):
 		self.cerrar_entradas()
 
 	def capturar(self):
-		self.reiniciar_temporales()
-		self.abrir_entradas()
-		n_intervalos = int(self.entrada_n_intervalos.get())
-		alfa = float(self.entrada_alfa.get())
+		entrada = self.validar_entradas()
+		if entrada:
+			self.reiniciar_temporales()
+			self.abrir_entradas()
+			n_intervalos = int(self.entrada_n_intervalos.get())
+			alfa = float(self.entrada_alfa.get())
 
-		resultado = self.prueba_frecuencia.probar(alfa, n_intervalos)
-		self.entrada_tam_intervalo.insert(0, str(self.prueba_frecuencia.tam_intervalo))
-		self.entrada_f_esperada.insert(0, str(self.prueba_frecuencia.frecuencia_esperada))
+			resultado = self.prueba_frecuencia.probar(alfa, n_intervalos)
+			self.entrada_tam_intervalo.insert(0, str(self.prueba_frecuencia.tam_intervalo))
+			self.entrada_f_esperada.insert(0, str(self.prueba_frecuencia.frecuencia_esperada))
 
-		self.generador_resultados = GeneradorResultados(
-			self, 5, self.prueba_frecuencia)
-		self.fila_resultados = self.generador_resultados.dibujar_intervalos()
-		self.generador_resultados.add_resultados(resultado)
+			self.generador_resultados = GeneradorResultados(
+				self, 5, self.prueba_frecuencia)
+			self.fila_resultados = self.generador_resultados.dibujar_intervalos()
+			self.generador_resultados.add_resultados(resultado)
 
-		self.cerrar_entradas()
+			self.cerrar_entradas()
+
+	def validar_entradas(self):
+		captura = {}
+		try:
+			captura["n_intervalos"] = int(self.entrada_n_intervalos.get())
+			captura["alfa"] = float(self.entrada_alfa.get())
+
+			if captura["alfa"] >= 1.0:
+				raise BadAlfaException(captura["alfa"])
+		except Exception as e:
+			messagebox.showwarning(message="Error en los datos de entradas", title="Entrada inválida")
+			return None
+		except BadAlfaException as e:
+			messagebox.showwarning(message=e.__str__(), title="Alfa inválido")
+			return None
+		return captura

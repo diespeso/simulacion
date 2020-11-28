@@ -33,12 +33,16 @@ class Ventana(Frame):
 	def configure_tab_control(self, event):
 		if self.tab_generador.get_is_generador_usado():
 			self.rellenar_tabs_de_prueba()
+			self.rellenar_tabs_de_aplicacion()
 		else:
 			pass #do nothing		
 
 	def rellenar_tabs_de_prueba(self):
 		self.rellenar_tab_promedio()
 		self.rellenar_tab_frecuencia()
+
+	def rellenar_tabs_de_aplicacion(self):
+		self.rellenar_tab_inventario()
 
 	def rellenar_tab_promedio(self):
 		#usar la generación del generador para rellenar la tab
@@ -48,6 +52,9 @@ class Ventana(Frame):
 	def rellenar_tab_frecuencia(self):
 		self.tab_frecuencia.rellenar(self.tab_generador.generador.get_generacion())
 
+	def rellenar_tab_inventario(self):
+		self.tab_inventario.set_numeros(self.tab_generador.generador.get_generacion())
+	
 	def crear_tabs(self):
 		self.tab_control = ttk.Notebook(self)
 

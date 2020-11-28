@@ -2,9 +2,11 @@
 
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 from prueba_promedio import PruebaPromedio
 
+from exceptions import BadAlfaException
 p_x = 3
 p_y = 3
 p_x_l = 10 #p_x largos
@@ -59,7 +61,7 @@ class InterfazPromedio(Frame):
 		ttk.Label(self, text="Zalfa/2").grid(
 			column = 1, row = 2, padx = p_x_l, pady = p_y)
 
-		ttk.Label(self, text="Conclusión").grid(
+		ttk.Label(self, text="Conclusión:").grid(
 			column = 0, row = 3, padx = p_x_l, pady = p_y + 10)
 
 	def add_entradas(self):
@@ -86,14 +88,30 @@ class InterfazPromedio(Frame):
 	def capturar(self):
 		self.reiniciar_temporales()
 		self.abrir_entradas()
-		z_alfa = float(self.entrada_alfa.get())
-		resultado = self.prueba_promedio.probar(z_alfa)
-		if resultado:
-			self.txt_conclusion.insert("0.0", "Los números están distribuidos uniformemente.")
-		else:
-			self.txt_conclusion.insert("0.0", "Los números no están distribuidos uniformemente.")
-		self.entrada_z_alfa.insert(0, str(self.prueba_promedio.z_alfa_mitad))
-		self.cerrar_entradas()
+		captura = self.validar_entradas()
+		if captura:
+			z_alfa = float(self.entrada_alfa.get())
+			resultado = self.prueba_promedio.probar(z_alfa)
+			if resultado:
+				self.txt_conclusion.insert("0.0", "Los números están distribuidos uniformemente.")
+			else:
+				self.txt_conclusion.insert("0.0", "Los números no están distribuidos uniformemente.")
+			self.entrada_z_alfa.insert(0, str(self.prueba_promedio.z_alfa_mitad))
+			self.cerrar_entradas()
+
+
+	def validar_entradas(self):
+		captura = {}
+		try:
+			captura["z_alfa"] = float(self.entrada_alfa.get())
+			if captura["z_alfa"] >= 1.0:
+				raise BadAlfaException(capturar["z_alfa"])
+		except Exception as e:
+			messagebox.showwarning(message="Entrada inválida", title="Error de entrada")
+			return None
+		except BadAlfaException as e:
+			messagebox.showwarning(message=e.__str__(), title="Alfa incorrecto")
+		return captura
 
 	def abrir_entradas(self):
 		self.entrada_promedio.config(state="enabled")
