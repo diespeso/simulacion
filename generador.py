@@ -81,7 +81,8 @@ class Generador:
 		siguiente = (self.multiplicador * self.actual + self.constante) % self.modulo
 		self.actual = round(siguiente, 5)
 		self.actualizar_historico()
-		return siguiente
+		#return siguiente
+		return round(self.actual / self.modulo, precision)
 
 	def ciclo(self, n, mostrar=False):
 		""" genera n números pseudoaleatorios en su historial

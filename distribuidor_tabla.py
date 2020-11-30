@@ -22,6 +22,7 @@ class DistribuidorDeTabla:
 			self.relacion = self.crear_relacion()
 		except Exception as e:
 			print(e.__str__())
+			print(self.relaciones)
 			sys.exit(0)
 
 	def mostrar(self, distribucion=False):
@@ -101,9 +102,22 @@ class DistribuidorDeTabla:
 		self.relaciones = relaciones
 		self.revisar_relaciones()
 
+	def generar_str(self):
+		"""Genera una string que representa la tabla,
+		es como regresar a la tabla original
+		"""
+		str_relacion = ""
+		for i in range(0, len(self.relaciones)):
+			relacion = self.relaciones[i]
+			evento = self.eventos[i]
+			str_relacion += str(round(relacion[1] - relacion[0], 5))
+			str_relacion += " " +str(evento) + "\n"
+
+		return str_relacion[:-1] #borra la newline que queda al final
 
 	def revisar_relaciones(self):
-		if self.relaciones[-1][1] != 1.0:
+		if self.relaciones[-1][1] > 1.0 + 0.1: # 0.01: 1porciento de tolerancia:
+			print(self.generar_str())
 			raise Exception("La distribución de probabilidades no suma 1.0")
 
 
