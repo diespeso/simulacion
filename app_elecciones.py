@@ -71,8 +71,7 @@ class Votante:
 			self.contador_votos += 1
 
 			#redistribuir tabla eliminando lo que se acaba de votar para evitar repetir
-			self.distro = redistribuir_tabla(self.votos[c], self.distro)
-			print(self.votos)
+			self.distro = redistribuir_tabla(self.votos[c], self.distro)	
 			
 			return self.votos[c]
 		self.reiniciar() # ya se votó N veces
@@ -97,7 +96,6 @@ def redistribuir_tabla(ev, distro):
 	copia = copy.deepcopy(distro)
 	if ev in copia.eventos:
 		evento = copia.eventos.index(ev)
-		print("ev", ev, "evento", evento)
 		prob = round(copia.relaciones[evento][1] - copia.relaciones[evento][0], 5)
 		#borrar el seleccionado
 		del copia.eventos[evento]
@@ -105,7 +103,6 @@ def redistribuir_tabla(ev, distro):
 
 		tam = len(copia.eventos)
 		aumento = round(prob / tam, 5)
-		print("prob", prob, "tam", tam, "aumento", aumento)
 
 		str_relaciones = copia.generar_str()
 		str_deposito = ""
@@ -136,14 +133,17 @@ def main():
 	gen.ciclo(300)
 	
 	votante = Votante()
-	for i in range(0, 10):
+	for i in range(0, 3):
 		pseudo = gen.next()
 		print("pseudo", pseudo)
 		voto = votante.votar(pseudo, distro)
-		if voto:
+		if votante.contador_votos == N_VOTOS:
+			print(votante.votos)
+		"""if voto:
 			print(votante.votos, votante.contador_votos)
 		else:
 			print("reinicio!")
+			"""
 		
 
 if __name__ == '__main__':
