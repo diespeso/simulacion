@@ -176,9 +176,11 @@ class Votacion:
 					if j == 2:
 						self.registrar_voto(sector[0], self.votante.votos)
 						print(self.votante.votos)
-
-		print("sector 1: ", self.analizar_sector(1))
-
+		#debe ser por cada sector
+		"""print("sector 1: ", self.analizar_sector(5))
+		for i in range(1, 7):
+			print("votos para {}: ".format(i), self.contar_votos_sector(5, i))
+		"""
 
 	def registrar_voto(self, n_sector,  voto):
 		"""Registra el voto segun el n_sector al que pertence
@@ -250,6 +252,13 @@ class Votacion:
 	def contar_votos_sector(self, n_sector, opcion):
 		"""cuenta cuantos votos hubo para la opcion
 		dada en el sector dado"""
+		vector = self.vector_votos(n_sector)
+		contador = 0
+		for voto in vector:
+			if voto == opcion:
+				contador += 1
+
+		return contador
 
 	def vector_votos(self, n_sector):
 		votos = self.votos[n_sector]
