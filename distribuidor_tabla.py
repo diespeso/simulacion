@@ -131,4 +131,5 @@ class DistribuidorDeTabla:
 			limites = self.relaciones[evento]
 			if pseudo >= limites[0] and pseudo < limites[1]:
 				return self.eventos[evento]
+		print(pseudo)
 		raise Exception("No se pudo encontrar un evento en ninǵun rango")

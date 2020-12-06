@@ -7,6 +7,7 @@ from interfaz.interfaz_generador import InterfazGenerador
 from interfaz.interfaz_promedio import InterfazPromedio
 from interfaz.interfaz_frecuencia import InterfazFrecuencia
 from interfaz.interfaz_app_inventario import InterfazAppInventario
+from interfaz.interfaz_app_elecciones import InterfazAppElecciones
 
 
 class Ventana(Frame):
@@ -18,6 +19,7 @@ class Ventana(Frame):
 		self.tab_promedio = None
 		self.tab_frecuencia = None
 		self.tab_inventario = None
+		self.tab_elecciones = None
 		self.init_window()
 		self.tab_control.bind("<<NotebookTabChanged>>", self.configure_tab_control)
 		if args:
@@ -43,6 +45,7 @@ class Ventana(Frame):
 
 	def rellenar_tabs_de_aplicacion(self):
 		self.rellenar_tab_inventario()
+		self.rellenar_tab_elecciones()
 
 	def rellenar_tab_promedio(self):
 		#usar la generación del generador para rellenar la tab
@@ -55,6 +58,9 @@ class Ventana(Frame):
 	def rellenar_tab_inventario(self):
 		self.tab_inventario.set_numeros(self.tab_generador.generador.get_generacion())
 	
+	def rellenar_tab_elecciones(self):
+		self.tab_elecciones.set_numeros(self.tab_generador.generador.get_generacion())
+
 	def crear_tabs(self):
 		self.tab_control = ttk.Notebook(self)
 
@@ -64,11 +70,13 @@ class Ventana(Frame):
 		self.tab_promedio = InterfazPromedio(self.tab_control)
 		self.tab_frecuencia = InterfazFrecuencia(self.tab_control)
 		self.tab_inventario = InterfazAppInventario(self.tab_control)
+		self.tab_elecciones = InterfazAppElecciones(self.tab_control)
 
 		self.tab_control.add(self.tab_generador, text="Generador")
 		self.tab_control.add(self.tab_promedio, text="Prueba Promedio")
 		self.tab_control.add(self.tab_frecuencia, text="Prueba Frecuencia")
 		self.tab_control.add(self.tab_inventario, text="Inventarios")
+		self.tab_control.add(self.tab_elecciones, text="Elecciones")
 		self.tab_control.grid(column= 1, row = 1)
 		#self.tab_control.pack(expand=1, fill=BOTH)
 

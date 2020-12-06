@@ -7,6 +7,7 @@ en orden de importancia
 
 from generador import Generador
 from distribuidor_tabla import DistribuidorDeTabla
+from parser_tablas import leer_archivo
 import copy
 import statistics
 
@@ -28,7 +29,7 @@ def id_to_propuesta(id):
 	elif id == 5:
 		return "honestidad de los servidores"
 	elif id == 6:
-		return "atención al educación"
+		return "atención a la educación"
 	else:
 		raise Exception("Id de propuesta inexistente")
 
@@ -168,25 +169,35 @@ class Votacion:
 		"""
 		c_pseudo = 0
 		for sector in self.votos_sector.items():
-			print("sector {}: {} votantes".format(sector[0], sector[1]))
+			#print("sector {}: {} votantes".format(sector[0], sector[1]))
 			for i in range(0, sector[1]): #por cada votante en el sector
 				for j in range(0, 3): # 3 votos
 					voto = self.votante.votar(self.numeros[c_pseudo], self.distro)
 					c_pseudo += 1
 					if j == 2:
 						self.registrar_voto(sector[0], self.votante.votos)
-						print(self.votante.votos)
+						#print(self.votante.votos)
 		#debe ser por cada sector
-		"""print("sector 1: ", self.analizar_sector(5))
+		#print("sector 5: ", self.analizar_sector(5))
 		for i in range(1, 7):
-			print("votos para {}: ".format(i), self.contar_votos_sector(5, i))
-		"""
+			#print("votos para {}: ".format(i), self.contar_votos_sector(5, i))
+			pass
 
 	def registrar_voto(self, n_sector,  voto):
 		"""Registra el voto segun el n_sector al que pertence
 		"""
 		if len(voto) == 3:
 			self.votos[n_sector].append(voto)
+
+	def get_votos_str(self, n_sector):
+		str_resultado = ""
+		for voto in self.votos[n_sector]:
+			for opcion in voto:
+				str_resultado += str(opcion) + " "
+			str_resultado[:-1] # eliminar el espacio que sobra
+			str_resultado += "\n"
+		return str_resultado[:-1] #eliminar newline que sobra
+
 
 	def analizar_sector(self, n_sector):
 		"""Regresa las 5 opciones mas votadas y su cantidad
@@ -251,7 +262,10 @@ class Votacion:
 
 	def contar_votos_sector(self, n_sector, opcion):
 		"""cuenta cuantos votos hubo para la opcion
-		dada en el sector dado"""
+		dada en el sector dado.
+
+		No es realmente útil, pero está por si se
+		quiere saber"""
 		vector = self.vector_votos(n_sector)
 		contador = 0
 		for voto in vector:
