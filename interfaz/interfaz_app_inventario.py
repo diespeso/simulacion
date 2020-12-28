@@ -56,6 +56,8 @@ class InterfazAppInventario(Frame):
 
 		self.numero = None
 
+		self.entradas = None
+
 		self.init_interfaz()
 
 	def init_interfaz(self):
@@ -150,15 +152,15 @@ class InterfazAppInventario(Frame):
 		self.add_encabezado_simulacion()
 
 	def capturar_datos(self):
-		entradas = self.validar_entradas()
-		if entradas:
-			self.q = entradas["q"]
-			self.r = entradas["r"]
-			self.inv_inicial = entradas["inv_inicial"]
-			self.din_inventario = entradas["din_inventario"]
-			self.din_ordenar = entradas["din_ordenar"]
-			self.din_faltante = entradas["din_faltante"]
-			self.meses = entradas["meses"]
+		self.entradas = self.validar_entradas()
+		if self.entradas:
+			self.q = self.entradas["q"]
+			self.r = self.entradas["r"]
+			self.inv_inicial = self.entradas["inv_inicial"]
+			self.din_inventario = self.entradas["din_inventario"]
+			self.din_ordenar = self.entradas["din_ordenar"]
+			self.din_faltante = self.entradas["din_faltante"]
+			self.meses = self.entradas["meses"]
 			if self.numeros:
 				self.simulacion = SimInventario(self.q, self.r, self.inv_inicial, self.numeros)
 				tablas = self.leer_archivos_tablas()
@@ -247,17 +249,26 @@ class InterfazAppInventario(Frame):
 				menor = self.registros[i]
 				index = i
 		self.optimo = self.registros[index]
+
+		#revisar si se repiten los menores
+		repetidos = 0
+		for i in range(0, len(self.registros)):
+			if self.registros[i]["costo"] == menor["costo"]:
+				repetidos += 1
+		if repetidos >= 2:
+			messagebox.showwarning(message="El costo mínimo se repite, cualquiera que se elija será el correcto.")
 		return index
 
 	def simular(self):
 		#prueba: self.limpiar_txt_simulacion()
 		self.limpiar_txt_simulacion()
 		self.capturar_datos()
-		for i in range(0, self.meses):
-			self.txt_simulacion.insert(INSERT,
-				self.simulacion.simular() + "\n"
-			);
-		self.armar_registro_actual()
+		if self.entradas:
+			for i in range(0, self.meses):
+				self.txt_simulacion.insert(INSERT,
+					self.simulacion.simular() + "\n"
+				);
+			self.armar_registro_actual()
 
 	def armar_registro_actual(self):
 		"""Solo debe ser llamada luego de terminar una simulación
