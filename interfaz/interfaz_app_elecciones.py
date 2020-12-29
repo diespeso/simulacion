@@ -40,6 +40,7 @@ class InterfazAppElecciones(Frame):
 		self.c_cinco = None
 
 		self.entrada_votantes = None
+		self.entrada_muestra = None
 
 		self.btn_simular = None
 
@@ -90,18 +91,26 @@ class InterfazAppElecciones(Frame):
 		self.entrada_votantes.grid(
 			column = 1, row = 0, padx = p_x_l, pady = p_y)
 
+		self.entrada_muestra = ttk.Entry(self, width=15)
+		self.entrada_muestra.grid(
+			column = 3, row = 0, padx = p_x_l, pady = p_y)
+
 	def simular(self):
 		votantes = None
+		muestra = None
 		try: 
 			probabilidades = DistribuidorDeTabla(
 				leer_archivo("votos")
 			)
 			votantes = int(self.entrada_votantes.get())
+			muestra = round(float(self.entrada_muestra.get()), 2) #solo dos decimales
 
 		except Exception as e:
 			messagebox.showwarning(message=e.__str__())
-		if not votantes: #si falló el parsing
+		if not votantes or not muestra: #si falló el parsing
 			return
+		else:
+			votantes = int(votantes * muestra)
 		if votantes * 3 > len(self.numeros):
 			messagebox.showwarning(message="Los números generados no son suficientes, faltan: {}".format(
 				votantes * 3 - len(self.numeros) ))
@@ -169,6 +178,8 @@ class InterfazAppElecciones(Frame):
 	def add_labels(self):
 		ttk.Label(self, text="Votantes:").grid(
 			column = 0, row = 0, padx = p_x_l, pady = p_y)
+		ttk.Label(self, text="% muestra:").grid(
+			column = 2, row = 0, padx = p_x_l, pady = p_y)
 		ttk.Label(self, text="Clave").grid(
 			column = 0, row = 1, padx = p_x_l, pady = p_y)
 		ttk.Label(self, text="1: Creación y protección del empleo.  2. Atención a la seguridad.  3. Impulso al comercio y al turismo.  4. Prestación de servicios.\n" + 
