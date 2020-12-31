@@ -21,8 +21,8 @@ class Red:
 
 		self.factores = None
 
-		self.set_nodos(Nodo('alfa'), Nodo('alfa'), Nodo('alfa'),
-			Nodo('alfa'), Nodo('alfa'))
+		"""self.set_nodos(Nodo('alfa'), Nodo('alfa'), Nodo('alfa'),
+			Nodo('alfa'), Nodo('alfa'))"""
 
 		self.set_factores_envio({'a': 0.7,
 			'b': 1,
@@ -53,7 +53,15 @@ class Red:
 		self.costos = {"a": 0.0, "b": 0.0, "c": 0.0, "d": 0.0,
 		"e": 0.0}
 
+		self.nodos = {}
+
 	def set_nodos(self, nodo_a, nodo_b, nodo_c, nodo_d, nodo_e):
+		self.nodos["a"] = nodo_a
+		self.nodos["b"] = nodo_b
+		self.nodos["c"] = nodo_c
+		self.nodos["d"] = nodo_d
+		self.nodos["e"] = nodo_e
+
 		self.nodo_a = nodo_a
 		self.nodo_b = nodo_b
 		self.nodo_c = nodo_c
@@ -236,6 +244,19 @@ class Red:
 	def set_paquetes_exitosos(self):
 		self.paquetes_exitosos = self.calcular_paquetes_exitosos()
 
+	def get_paquetes_perdidos(self, letra):
+		"""regresa la cantidad de paquetes perdidos en la línea
+		del nodo de la letra dada
+		"""
+		print("letra: ", letra, " factor perdida: ", 1 - self.factores[letra],
+			" perdidos: ",(1 - self.factores[letra]) * self.paquetes_por_linea)
+		print("paquetes p linea", self.paquetes_por_linea)
+		return int(
+			round(
+				(1 - self.factores[letra]) * self.paquetes_por_linea
+			)
+		)
+	
 	def calcular_paquetes_exitosos(self):
 		return round( self.f_nodo_a * self.paquetes_por_linea
 			+ self.f_nodo_b * self.paquetes_por_linea
@@ -268,6 +289,7 @@ class Nodo:
 
 	"""
 	def __init__(self, str_tipo):
+		str_tipo = str_tipo.lower()
 		self.mb_min = 0.3
 		self.mb_max = 1.7
 

@@ -41,7 +41,7 @@ class Ventana(Frame):
 			self.rellenar_tabs_de_aplicacion()
 		else:
 			pass #do nothing
-		print(self.tab_control.tab("current"))
+		#print(self.tab_control.tab("current"))
 		current_tab = self.tab_control.tab("current")
 		if current_tab['text'] == "Simulación de Red": #si se entra a la app de red
 			self.root.geometry("920x600+100+100")
