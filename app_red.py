@@ -19,6 +19,8 @@ class Red:
 		self.nodo_d = None
 		self.nodo_e = None
 
+		self.factores = None
+
 		self.set_nodos(Nodo('alfa'), Nodo('alfa'), Nodo('alfa'),
 			Nodo('alfa'), Nodo('alfa'))
 
@@ -34,6 +36,7 @@ class Red:
 		self.paquetes = None
 		self.paquetes_exitosos = 0
 
+
 		self.mb_paquete = mb_paquete
 		self.mb_archivo = mb_archivo
 		print("tam archivo: ", self.mb_archivo)
@@ -45,6 +48,11 @@ class Red:
 
 		self.set_paquetes_exitosos() #depende de factores y nodos
 
+		self.tiempos = {"a": 0.0, "b": 0.0, "c": 0.0, "d": 0.0,
+		"e": 0.0} # "a": 10.23s, etc.
+		self.costos = {"a": 0.0, "b": 0.0, "c": 0.0, "d": 0.0,
+		"e": 0.0}
+
 	def set_nodos(self, nodo_a, nodo_b, nodo_c, nodo_d, nodo_e):
 		self.nodo_a = nodo_a
 		self.nodo_b = nodo_b
@@ -52,7 +60,31 @@ class Red:
 		self.nodo_d = nodo_d
 		self.nodo_e = nodo_e
 
+	def add_tiempo(self, letra, tiempo):
+		self.tiempos[letra] += tiempo
+		#asegura que el tiempo sea de n digitos decimales
+		self.tiempos[letra] = round(self.tiempos[letra], precision)
+
+	def add_n_paquetes_perdidos(self, letra, paquetes):
+		""" añade el costo de n paquetes perdidos al paquete
+		cuya letra se brinde
+		"""
+		if letra == "a":
+			nodo = self.nodo_a
+		elif letra == "b":
+			nodo = self.nodo_b
+		elif letra == "c":
+			nodo = self.nodo_c
+		elif letra == "d":
+			nodo = self.nodo_d
+		elif letra == "e":
+			nodo = self.nodo_e
+
+		self.costos[letra] += paquetes * nodo.costo_perdida
+		self.costos[letra] = round(self.costos[letra], precision)
+
 	def set_factores_envio(self, factores):
+		self.factores = factores
 		self.f_nodo_a = factores['a']
 		self.f_nodo_b = factores['b']
 		self.f_nodo_c = factores['c']
@@ -76,7 +108,13 @@ class Red:
 				if not self.simular_estatico(numeros[i]):
 					print("fin de la simulación")
 					#todo bien(?)
-					return True
+		self.calcular_costo_total("a")
+		self.calcular_costo_total("b")
+		self.calcular_costo_total("c")
+		self.calcular_costo_total("d")
+		self.calcular_costo_total("e")
+
+		return True
 
 	def simular_estatico(self, pseudo):
 		"""
@@ -86,6 +124,7 @@ class Red:
 		Si el paquete se envió regresa True,
 		Si ya se acabaron los paquetes regresa False y no hace nada
 		"""
+		print("pseudo: ", pseudo)
 		print("global: ", self.contador_global_paquetes + 1)
 		print("limite: ", self.paquetes_exitosos)
 		if self.contador_global_paquetes + 1  == self.paquetes_exitosos:
@@ -101,6 +140,10 @@ class Red:
 				print("velocidad: ", vel, " mb/s")
 				self.contador_paquetes += 1
 				self.contador_global_paquetes += 1
+
+				perdidos = self.paquetes_por_linea * (1 - self.f_nodo_a)
+				self.add_n_paquetes_perdidos(self.nodo_actual, perdidos)
+				self.add_tiempo(self.nodo_actual, vel)
 			else:
 				self.nodo_actual = 'b' # siguiente nodo
 				self.contador_paquetes = 0
@@ -111,6 +154,10 @@ class Red:
 				print("velocidad: ", vel, " mb/s")
 				self.contador_paquetes += 1
 				self.contador_global_paquetes += 1
+
+				perdidos = self.paquetes_por_linea * (1 - self.f_nodo_b)
+				self.add_n_paquetes_perdidos(self.nodo_actual, perdidos)
+				self.add_tiempo(self.nodo_actual, vel)
 			else:
 				self.nodo_actual = 'c'
 				self.contador_paquetes = 0
@@ -121,6 +168,10 @@ class Red:
 				print("velocidad: ", vel, " mb/s")
 				self.contador_paquetes += 1
 				self.contador_global_paquetes += 1
+
+				perdidos = self.paquetes_por_linea * (1 - self.f_nodo_c)
+				self.add_n_paquetes_perdidos(self.nodo_actual, perdidos)
+				self.add_tiempo(self.nodo_actual, vel)
 			else:
 				self.nodo_actual = 'd'
 				self.contador_paquetes = 0
@@ -131,6 +182,10 @@ class Red:
 				print("velocidad: ", vel, " mb/s")
 				self.contador_paquetes += 1
 				self.contador_global_paquetes += 1
+
+				perdidos = self.paquetes_por_linea * (1 - self.f_nodo_d)
+				self.add_n_paquetes_perdidos(self.nodo_actual, perdidos)
+				self.add_tiempo(self.nodo_actual, vel)
 			else:
 				self.nodo_actual = 'e'
 				self.contador_paquetes = 0
@@ -141,10 +196,42 @@ class Red:
 				print("velocidad: ", vel, " mb/s")
 				self.contador_paquetes += 1
 				self.contador_global_paquetes += 1
+
+				perdidos = self.paquetes_por_linea * (1 - self.f_nodo_e)
+				self.add_n_paquetes_perdidos(self.nodo_actual, perdidos)
+				self.add_tiempo(self.nodo_actual, vel)
 			else:
 				self.contador_paquetes = 0
 				self.nodo_actual = None
+			
 		return True
+
+	def calcular_costo_total(self, letra):
+		"""Toma la letra del nodo a calcular y devuelve:
+		costo total = costo perdidos * perdidos
+		+ costo electrico por minuto * minutos
+		"""
+		costo_tiempo = self.calcular_costo_tiempo(letra)
+		print("costo base de perdida: ", self.costos[letra])
+		print("costo de energia por minuto: ", costo_tiempo)
+		self.costos[letra] += costo_tiempo
+		self.costos[letra] = round(self.costos[letra], precision)
+	
+	def calcular_costo_tiempo(self, letra):
+		"""sólo útil si ya se usó la función de add_tiempos
+		"""
+		if letra == "a":
+			nodo = self.nodo_a
+		elif letra == "b":
+			nodo = self.nodo_b
+		elif letra == "c":
+			nodo = self.nodo_c
+		elif letra == "d":
+			nodo = self.nodo_d
+		elif letra == "e":
+			nodo = self.nodo_e
+		if self.tiempos:
+			return self.tiempos[letra] * nodo.costo_electrico
 
 	def set_paquetes_exitosos(self):
 		self.paquetes_exitosos = self.calcular_paquetes_exitosos()
@@ -189,11 +276,14 @@ class Nodo:
 		if str_tipo == 'alfa': #modelo de alto rendimiento
 			self.mb_prom = 1.3
 			self.costo_electrico = 0.015 # pesos de consumo por minuto
+			self.costo_perdida = 0.030 # se pierde el doble
 		elif str_tipo == 'beta': #modelo de medio rendimiento
 			self.mb_prom = 0.8
 			self.costo_electrico = 0.0075
+			self.costo_perdida = 0.0150
 		elif str_tipo == 'gamma': #modelo de bajo rendimiento
 			self.costo_electrico = 0.0050
+			self.costo_perdida = 0.010
 			self.mb_prom = 0.6
 		else:
 			print("no existe ese tipo de nodo")
@@ -217,17 +307,17 @@ if __name__ == '__main__':
 	beta = Nodo('beta')
 	gamma = Nodo('gamma')
 
-	gen = Generador(17, 14, 50, 3)
+	gen = Generador(12, 14, 5092, 3012)
 	gen.ciclo(100)
 	numeros = gen.get_generacion()
 
 	red = Red(mb_archivo, mb_paquete)
 	red.set_nodos(
-		Nodo('alfa'),
 		Nodo('gamma'),
-		Nodo('beta'),
-		Nodo('alfa'),
-		Nodo('beta')
+		Nodo('gamma'),
+		Nodo('gamma'),
+		Nodo('gamma'),
+		Nodo('gamma')
 	)
 	print("paquetes reales a enviar: ", red.calcular_paquetes_exitosos())
 	"""
@@ -247,3 +337,8 @@ if __name__ == '__main__':
 		print("exito")
 	else:
 		print("no éxito")
+
+	for nodo in red.costos:
+		print(nodo, red.costos[nodo])
+	for nodo in red.tiempos:
+		print(nodo, red.tiempos[nodo])

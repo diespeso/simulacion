@@ -21,8 +21,9 @@ def main():
 		datos["tamano"] = int(sys.argv[5])
 
 	root = Tk()
-	root.geometry("868x600")
+	root.geometry("868x600+100+100")
 	app = Ventana(root, args=datos)
+	app.set_root(root)
 	root.mainloop()
 
 if __name__ == '__main__':

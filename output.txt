@@ -1,0 +1,627 @@
+tam archivo:  500
+tam paquete:  5
+paquetes:  100
+paquetes por línea:  20
+paquetes reales a enviar:  88
+global:  1
+limite:  88
+nodo actual:  a
+contador paquetes:  0
+paquetes enviados:  0
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  5.263  mb/s
+global:  2
+limite:  88
+nodo actual:  a
+contador paquetes:  1
+paquetes enviados:  1
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  4.854  mb/s
+global:  3
+limite:  88
+nodo actual:  a
+contador paquetes:  2
+paquetes enviados:  2
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  3.788  mb/s
+global:  4
+limite:  88
+nodo actual:  a
+contador paquetes:  3
+paquetes enviados:  3
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  3.521  mb/s
+global:  5
+limite:  88
+nodo actual:  a
+contador paquetes:  4
+paquetes enviados:  4
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  3.425  mb/s
+global:  6
+limite:  88
+nodo actual:  a
+contador paquetes:  5
+paquetes enviados:  5
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  4.167  mb/s
+global:  7
+limite:  88
+nodo actual:  a
+contador paquetes:  6
+paquetes enviados:  6
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  6.757  mb/s
+global:  8
+limite:  88
+nodo actual:  a
+contador paquetes:  7
+paquetes enviados:  7
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  3.968  mb/s
+global:  9
+limite:  88
+nodo actual:  a
+contador paquetes:  8
+paquetes enviados:  8
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  4.386  mb/s
+global:  10
+limite:  88
+nodo actual:  a
+contador paquetes:  9
+paquetes enviados:  9
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  3.704  mb/s
+global:  11
+limite:  88
+nodo actual:  a
+contador paquetes:  10
+paquetes enviados:  10
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  4.274  mb/s
+global:  12
+limite:  88
+nodo actual:  a
+contador paquetes:  11
+paquetes enviados:  11
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  4.545  mb/s
+global:  13
+limite:  88
+nodo actual:  a
+contador paquetes:  12
+paquetes enviados:  12
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  7.463  mb/s
+global:  14
+limite:  88
+nodo actual:  a
+contador paquetes:  13
+paquetes enviados:  13
+tipo:  alfa 	 estabilidad:  0.7
+velocidad:  3.145  mb/s
+global:  15
+limite:  88
+nodo actual:  a
+contador paquetes:  14
+paquetes enviados:  14
+tipo:  alfa 	 estabilidad:  0.7
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.289  mb/s
+global:  16
+limite:  88
+nodo actual:  b
+contador paquetes:  1
+paquetes enviados:  15
+tipo:  alfa 	 estabilidad:  1
+velocidad:  5.556  mb/s
+global:  17
+limite:  88
+nodo actual:  b
+contador paquetes:  2
+paquetes enviados:  16
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.876  mb/s
+global:  18
+limite:  88
+nodo actual:  b
+contador paquetes:  3
+paquetes enviados:  17
+tipo:  alfa 	 estabilidad:  1
+velocidad:  6.25  mb/s
+global:  19
+limite:  88
+nodo actual:  b
+contador paquetes:  4
+paquetes enviados:  18
+tipo:  alfa 	 estabilidad:  1
+velocidad:  5.051  mb/s
+global:  20
+limite:  88
+nodo actual:  b
+contador paquetes:  5
+paquetes enviados:  19
+tipo:  alfa 	 estabilidad:  1
+velocidad:  8.475  mb/s
+global:  21
+limite:  88
+nodo actual:  b
+contador paquetes:  6
+paquetes enviados:  20
+tipo:  alfa 	 estabilidad:  1
+velocidad:  5.263  mb/s
+global:  22
+limite:  88
+nodo actual:  b
+contador paquetes:  7
+paquetes enviados:  21
+tipo:  alfa 	 estabilidad:  1
+velocidad:  4.854  mb/s
+global:  23
+limite:  88
+nodo actual:  b
+contador paquetes:  8
+paquetes enviados:  22
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.788  mb/s
+global:  24
+limite:  88
+nodo actual:  b
+contador paquetes:  9
+paquetes enviados:  23
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.521  mb/s
+global:  25
+limite:  88
+nodo actual:  b
+contador paquetes:  10
+paquetes enviados:  24
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.425  mb/s
+global:  26
+limite:  88
+nodo actual:  b
+contador paquetes:  11
+paquetes enviados:  25
+tipo:  alfa 	 estabilidad:  1
+velocidad:  4.167  mb/s
+global:  27
+limite:  88
+nodo actual:  b
+contador paquetes:  12
+paquetes enviados:  26
+tipo:  alfa 	 estabilidad:  1
+velocidad:  6.757  mb/s
+global:  28
+limite:  88
+nodo actual:  b
+contador paquetes:  13
+paquetes enviados:  27
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.968  mb/s
+global:  29
+limite:  88
+nodo actual:  b
+contador paquetes:  14
+paquetes enviados:  28
+tipo:  alfa 	 estabilidad:  1
+velocidad:  4.386  mb/s
+global:  30
+limite:  88
+nodo actual:  b
+contador paquetes:  15
+paquetes enviados:  29
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.704  mb/s
+global:  31
+limite:  88
+nodo actual:  b
+contador paquetes:  16
+paquetes enviados:  30
+tipo:  alfa 	 estabilidad:  1
+velocidad:  4.274  mb/s
+global:  32
+limite:  88
+nodo actual:  b
+contador paquetes:  17
+paquetes enviados:  31
+tipo:  alfa 	 estabilidad:  1
+velocidad:  4.545  mb/s
+global:  33
+limite:  88
+nodo actual:  b
+contador paquetes:  18
+paquetes enviados:  32
+tipo:  alfa 	 estabilidad:  1
+velocidad:  7.463  mb/s
+global:  34
+limite:  88
+nodo actual:  b
+contador paquetes:  19
+paquetes enviados:  33
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.145  mb/s
+global:  35
+limite:  88
+nodo actual:  b
+contador paquetes:  20
+paquetes enviados:  34
+tipo:  alfa 	 estabilidad:  1
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.289  mb/s
+global:  36
+limite:  88
+nodo actual:  c
+contador paquetes:  1
+paquetes enviados:  35
+tipo:  alfa 	 estabilidad:  1
+velocidad:  5.556  mb/s
+global:  37
+limite:  88
+nodo actual:  c
+contador paquetes:  2
+paquetes enviados:  36
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.876  mb/s
+global:  38
+limite:  88
+nodo actual:  c
+contador paquetes:  3
+paquetes enviados:  37
+tipo:  alfa 	 estabilidad:  1
+velocidad:  6.25  mb/s
+global:  39
+limite:  88
+nodo actual:  c
+contador paquetes:  4
+paquetes enviados:  38
+tipo:  alfa 	 estabilidad:  1
+velocidad:  5.051  mb/s
+global:  40
+limite:  88
+nodo actual:  c
+contador paquetes:  5
+paquetes enviados:  39
+tipo:  alfa 	 estabilidad:  1
+velocidad:  8.475  mb/s
+global:  41
+limite:  88
+nodo actual:  c
+contador paquetes:  6
+paquetes enviados:  40
+tipo:  alfa 	 estabilidad:  1
+velocidad:  5.263  mb/s
+global:  42
+limite:  88
+nodo actual:  c
+contador paquetes:  7
+paquetes enviados:  41
+tipo:  alfa 	 estabilidad:  1
+velocidad:  4.854  mb/s
+global:  43
+limite:  88
+nodo actual:  c
+contador paquetes:  8
+paquetes enviados:  42
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.788  mb/s
+global:  44
+limite:  88
+nodo actual:  c
+contador paquetes:  9
+paquetes enviados:  43
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.521  mb/s
+global:  45
+limite:  88
+nodo actual:  c
+contador paquetes:  10
+paquetes enviados:  44
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.425  mb/s
+global:  46
+limite:  88
+nodo actual:  c
+contador paquetes:  11
+paquetes enviados:  45
+tipo:  alfa 	 estabilidad:  1
+velocidad:  4.167  mb/s
+global:  47
+limite:  88
+nodo actual:  c
+contador paquetes:  12
+paquetes enviados:  46
+tipo:  alfa 	 estabilidad:  1
+velocidad:  6.757  mb/s
+global:  48
+limite:  88
+nodo actual:  c
+contador paquetes:  13
+paquetes enviados:  47
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.968  mb/s
+global:  49
+limite:  88
+nodo actual:  c
+contador paquetes:  14
+paquetes enviados:  48
+tipo:  alfa 	 estabilidad:  1
+velocidad:  4.386  mb/s
+global:  50
+limite:  88
+nodo actual:  c
+contador paquetes:  15
+paquetes enviados:  49
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.704  mb/s
+global:  51
+limite:  88
+nodo actual:  c
+contador paquetes:  16
+paquetes enviados:  50
+tipo:  alfa 	 estabilidad:  1
+velocidad:  4.274  mb/s
+global:  52
+limite:  88
+nodo actual:  c
+contador paquetes:  17
+paquetes enviados:  51
+tipo:  alfa 	 estabilidad:  1
+velocidad:  4.545  mb/s
+global:  53
+limite:  88
+nodo actual:  c
+contador paquetes:  18
+paquetes enviados:  52
+tipo:  alfa 	 estabilidad:  1
+velocidad:  7.463  mb/s
+global:  54
+limite:  88
+nodo actual:  c
+contador paquetes:  19
+paquetes enviados:  53
+tipo:  alfa 	 estabilidad:  1
+velocidad:  3.145  mb/s
+global:  55
+limite:  88
+nodo actual:  c
+contador paquetes:  20
+paquetes enviados:  54
+tipo:  alfa 	 estabilidad:  1
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  3.289  mb/s
+global:  56
+limite:  88
+nodo actual:  d
+contador paquetes:  1
+paquetes enviados:  55
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  5.556  mb/s
+global:  57
+limite:  88
+nodo actual:  d
+contador paquetes:  2
+paquetes enviados:  56
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  3.876  mb/s
+global:  58
+limite:  88
+nodo actual:  d
+contador paquetes:  3
+paquetes enviados:  57
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  6.25  mb/s
+global:  59
+limite:  88
+nodo actual:  d
+contador paquetes:  4
+paquetes enviados:  58
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  5.051  mb/s
+global:  60
+limite:  88
+nodo actual:  d
+contador paquetes:  5
+paquetes enviados:  59
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  8.475  mb/s
+global:  61
+limite:  88
+nodo actual:  d
+contador paquetes:  6
+paquetes enviados:  60
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  5.263  mb/s
+global:  62
+limite:  88
+nodo actual:  d
+contador paquetes:  7
+paquetes enviados:  61
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  4.854  mb/s
+global:  63
+limite:  88
+nodo actual:  d
+contador paquetes:  8
+paquetes enviados:  62
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  3.788  mb/s
+global:  64
+limite:  88
+nodo actual:  d
+contador paquetes:  9
+paquetes enviados:  63
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  3.521  mb/s
+global:  65
+limite:  88
+nodo actual:  d
+contador paquetes:  10
+paquetes enviados:  64
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  3.425  mb/s
+global:  66
+limite:  88
+nodo actual:  d
+contador paquetes:  11
+paquetes enviados:  65
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  4.167  mb/s
+global:  67
+limite:  88
+nodo actual:  d
+contador paquetes:  12
+paquetes enviados:  66
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  6.757  mb/s
+global:  68
+limite:  88
+nodo actual:  d
+contador paquetes:  13
+paquetes enviados:  67
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  3.968  mb/s
+global:  69
+limite:  88
+nodo actual:  d
+contador paquetes:  14
+paquetes enviados:  68
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  4.386  mb/s
+global:  70
+limite:  88
+nodo actual:  d
+contador paquetes:  15
+paquetes enviados:  69
+tipo:  alfa 	 estabilidad:  0.8
+velocidad:  3.704  mb/s
+global:  71
+limite:  88
+nodo actual:  d
+contador paquetes:  16
+paquetes enviados:  70
+tipo:  alfa 	 estabilidad:  0.8
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  4.274  mb/s
+global:  72
+limite:  88
+nodo actual:  e
+contador paquetes:  1
+paquetes enviados:  71
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  4.545  mb/s
+global:  73
+limite:  88
+nodo actual:  e
+contador paquetes:  2
+paquetes enviados:  72
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  7.463  mb/s
+global:  74
+limite:  88
+nodo actual:  e
+contador paquetes:  3
+paquetes enviados:  73
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  3.145  mb/s
+global:  75
+limite:  88
+nodo actual:  e
+contador paquetes:  4
+paquetes enviados:  74
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  3.289  mb/s
+global:  76
+limite:  88
+nodo actual:  e
+contador paquetes:  5
+paquetes enviados:  75
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  5.556  mb/s
+global:  77
+limite:  88
+nodo actual:  e
+contador paquetes:  6
+paquetes enviados:  76
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  3.876  mb/s
+global:  78
+limite:  88
+nodo actual:  e
+contador paquetes:  7
+paquetes enviados:  77
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  6.25  mb/s
+global:  79
+limite:  88
+nodo actual:  e
+contador paquetes:  8
+paquetes enviados:  78
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  5.051  mb/s
+global:  80
+limite:  88
+nodo actual:  e
+contador paquetes:  9
+paquetes enviados:  79
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  8.475  mb/s
+global:  81
+limite:  88
+nodo actual:  e
+contador paquetes:  10
+paquetes enviados:  80
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  5.263  mb/s
+global:  82
+limite:  88
+nodo actual:  e
+contador paquetes:  11
+paquetes enviados:  81
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  4.854  mb/s
+global:  83
+limite:  88
+nodo actual:  e
+contador paquetes:  12
+paquetes enviados:  82
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  3.788  mb/s
+global:  84
+limite:  88
+nodo actual:  e
+contador paquetes:  13
+paquetes enviados:  83
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  3.521  mb/s
+global:  85
+limite:  88
+nodo actual:  e
+contador paquetes:  14
+paquetes enviados:  84
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  3.425  mb/s
+global:  86
+limite:  88
+nodo actual:  e
+contador paquetes:  15
+paquetes enviados:  85
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  4.167  mb/s
+global:  87
+limite:  88
+nodo actual:  e
+contador paquetes:  16
+paquetes enviados:  86
+tipo:  alfa 	 estabilidad:  0.9
+velocidad:  6.757  mb/s
+global:  88
+limite:  88
+fin de la simulación
+exito
+a 63.26
+b 95.757
+c 95.757
+d 76.33
+e 83.699
