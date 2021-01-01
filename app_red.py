@@ -1,6 +1,7 @@
 #!/usr/bin/python3.9
 
 from math import sqrt
+from math import floor
 
 from generador import Generador
 
@@ -10,6 +11,15 @@ mb_paquete = 5
 paquetes = int(mb_archivo / mb_paquete)
 
 precision = 3
+
+def to_min_sec(tim):
+	"""convierte "14.89s" a (min, seg)
+	"""
+	tim = round(tim)
+	mins = floor(tim / 60)
+	secs = abs(round(tim - (60 * mins)))
+
+	return (mins, secs)
 
 class Red:
 	def __init__(self, mb_archivo, mb_paquete):
@@ -90,6 +100,8 @@ class Red:
 
 		self.costos[letra] += paquetes * nodo.costo_perdida
 		self.costos[letra] = round(self.costos[letra], precision)
+
+		print(letra, ".costobase: ", self.costos[letra])
 
 	def set_factores_envio(self, factores):
 		self.factores = factores

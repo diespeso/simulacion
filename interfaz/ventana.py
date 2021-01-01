@@ -43,10 +43,10 @@ class Ventana(Frame):
 			pass #do nothing
 		#print(self.tab_control.tab("current"))
 		current_tab = self.tab_control.tab("current")
-		if current_tab['text'] == "Simulación de Red": #si se entra a la app de red
+		"""if current_tab['text'] == "Simulación de Red": #si se entra a la app de red
 			self.root.geometry("920x600+100+100")
-		else:
-			self.root.geometry("868x600+100+100")
+		"""
+		
 
 	def rellenar_tabs_de_prueba(self):
 		self.rellenar_tab_promedio()

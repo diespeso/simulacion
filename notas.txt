@@ -12,3 +12,5 @@ alfa igual a %5
 Se podría mejorar la precisión de los límites de los intervalos en la prueba de la frecuencia
 https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/entry.html
 https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/entry.html
+
+ghost imports: tkinter y math

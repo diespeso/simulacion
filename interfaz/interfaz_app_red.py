@@ -9,12 +9,15 @@ from interfaz.ventana import *
 
 from app_red import Red
 from app_red import Nodo
+from app_red import to_min_sec
 
 p_x = 3
 p_y = 3
 p_x_l = 10 #p_x largos
 p_y_l = 10
 w = 10
+
+precision = 3
 
 class InterfazAppRed(Frame):
 	def __init__(self, master):
@@ -32,16 +35,25 @@ class InterfazAppRed(Frame):
 			'd': 0.8,
 			'e': 0.9})
 
+		self.registros = []
+
 		self.mb_paquete = None
 		self.mb_archivo = None
 
 		self.entry_mb_paquete = None
 		self.entry_mb_archivo = None
+		self.entry_total = None
+
+		self.lbl_total = None
 
 		self.btn_simular = None
 
 		self.txt_registros = None
 		self.btn_registrar = None
+
+		self.costo_total = 0.0
+
+		self.primera_vez = True
 
 		self.interfaz_nodos = None # diccionario de interfaz de nodos
 
@@ -63,7 +75,7 @@ class InterfazAppRed(Frame):
 		self.btn_registrar.grid(column = 0, row = 7, padx = p_x_l, pady = p_y, columnspan = 2)
 
 		self.btn_simular = ttk.Button(self, text="Simular",command=self.simular)
-		self.btn_simular.grid(column = 3, row = 8, padx = p_x_l, pady = p_y )
+		self.btn_simular.grid(column = 4, row = 8, padx = p_x_l, pady = p_y )
 	
 	def add_labels(self):
 		ttk.Label(self, text="mb/paquete").grid(
@@ -80,8 +92,10 @@ class InterfazAppRed(Frame):
 			column = 3, row = 2, padx = p_x_l, pady = p_y)
 		ttk.Label(self, text="Estabilidad de conexión").grid(
 			column = 4, row = 2, padx = p_x_l, pady = p_y)
-		ttk.Label(self, text="$ paquetes pérdidos").grid(
+		ttk.Label(self, text="$ Paquetes Pérdidos").grid(
 			column = 5, row = 2, padx = p_x_l, pady = p_y)
+		ttk.Label(self, text="$ Tiempo").grid(
+			column = 6, row = 2, padx = p_x_l, pady = p_y)
 
 		ttk.Label(self, text="Nodo A").grid(
 			column = 2, row = 3, padx = p_x_l, pady = p_y)
@@ -94,6 +108,9 @@ class InterfazAppRed(Frame):
 		ttk.Label(self, text="Nodo E").grid(
 			column = 2, row = 7, padx = p_x_l, pady = p_y)
 
+		ttk.Label(self, text="$ Total").grid(
+			column = 3, row = 9, padx = p_x_l, pady = p_y)
+
 	def add_entradas(self):
 		self.entry_mb_paquete = ttk.Entry(self, width=w)
 		self.entry_mb_paquete.grid(column = 1, row = 1, padx = p_x_l, pady = p_y)
@@ -104,6 +121,9 @@ class InterfazAppRed(Frame):
 
 		self.entry_mb_archivo = ttk.Entry(self, width=w)
 		self.entry_mb_archivo.grid(column = 1, row = 0, padx = p_x_l, pady = p_y)
+
+		self.entry_total = ttk.Entry(self, width=w)
+		self.entry_total.grid(column = 4, row = 9, padx = p_x_l, pady = p_y)
 
 	def add_interfaz_nodos(self):
 		self.interfaz_nodos = {}
@@ -144,10 +164,49 @@ class InterfazAppRed(Frame):
 		"""
 	
 	def registrar_actual(self):
-		print("todo: registrar")
-		#self.master.master.root.geometry("920x920")
+		#TODO: Lógica de registro
+		#(alfa, alfa, alfa, alfa, alfa) = $0.467
+		self.txt_registros.delete("1.0", END)
+		nodos = self.nodos
+		costo = self.costo_total
+		nuevo ="(A: {}, B: {}, C: {}, D: {}, E: {}) = ${:.3f}".format(
+			nodos["a"], nodos["b"], nodos["c"], nodos["d"], nodos["e"],
+			costo)
+		if not (nuevo in self.get_registros_str().split("\n")):
+			#si no está registrado
+			print(self.get_registros_str().split("\n"))
+			self.add_registro(self.nodos, self.costo_total)
+
+		print(self.get_registros_str())
+		self.txt_registros.insert(INSERT, self.get_registros_str())
+
+	def add_registro(self, nodos, costo):
+		self.registros.append({"nodos": nodos, "costo": costo})
+
+	def get_registros_str(self):
+		r = ""
+		for i in range(0, len(self.registros)):
+			r += self.get_registro_str(i)
+			r += "\n"
+		return r
+
+	def get_registro_str(self, index):
+		nodos = self.registros[index]["nodos"]
+		costo = self.registros[index]["costo"]
+
+		return "(A: {}, B: {}, C: {}, D: {}, E: {}) = ${:.3f}".format(
+			nodos["a"], nodos["b"], nodos["c"], nodos["d"], nodos["e"],
+			costo)
+
+	def get_registro(self, indice):
+		return self.registros[indice]
+
+	def generar_conclusion(self):
+		pass
 
 	def simular(self):
+		#borrar datos visuales de la simulación anterior
+		self.reiniciar()
 		self.nodos = {}
 		try:
 			"""
@@ -192,6 +251,23 @@ class InterfazAppRed(Frame):
 
 		self.red.simular(self.numeros)
 		self.add_lbl_paquetes()
+		self.add_lbl_tiempo()
+		self.add_lbl_total()
+
+		if self.primera_vez:
+			self.primera_vez = False
+
+	def reiniciar(self):
+		self.limpiar()
+		self.costo_total = 0.0
+
+	def limpiar(self):
+		if not self.primera_vez:
+			for letra in ["a", "b", "c", "d", "e"]:
+				self.interfaz_nodos[letra]["paquetes"].destroy()
+				self.interfaz_nodos[letra]["tiempo"].destroy()
+				#TODO:limpiar entry de total
+				self.entry_total.delete(0, 'end')
 
 	def add_lbl_paquetes(self):
 		col = 5
@@ -200,10 +276,37 @@ class InterfazAppRed(Frame):
 			perdidos = self.red.get_paquetes_perdidos(letra)
 			costo = self.red.nodos[letra].costo_perdida
 			total = perdidos * costo
+			self.costo_total += total
 
 			self.interfaz_nodos[letra]["paquetes"] = ttk.Label(
 				self, text="{}px${:.3f}=${:.3f}".format(
 					perdidos, costo, total)
-				).grid(column = col, row = r, padx = p_x_l, pady = p_y
+				)
+			self.interfaz_nodos[letra]["paquetes"].grid(column = col, row = r, padx = p_x_l, pady = p_y
 				)
 			r += 1
+
+	def add_lbl_tiempo(self):
+		col = 6
+		r = 3
+		for letra in ["a", "b", "c", "d", "e"]:
+			tiempo = to_min_sec(self.red.tiempos[letra])
+			costo = self.red.nodos[letra].costo_electrico
+			total = tiempo[0] * costo #minutos
+			total += tiempo[1] * costo / 60 #segundos
+			total = round(total, precision)
+			self.costo_total += total
+
+			self.interfaz_nodos[letra]["tiempo"] = ttk.Label(
+				self, text="{}min{}sx${:.3f}=${:.3f}".format(
+					tiempo[0].__str__(), tiempo[1].__str__(), costo, total
+					)
+			)
+			self.interfaz_nodos[letra]["tiempo"].grid(column = col, row = r, padx = p_x_l, pady = p_y)
+			r += 1
+
+	def add_lbl_total(self):
+		"""Añade el label que muestra el costo total
+		"""
+		self.entry_total.insert(0, "${:.3f}".format(round(self.costo_total, precision)))
+		
