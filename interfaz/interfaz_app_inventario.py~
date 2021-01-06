@@ -215,7 +215,6 @@ class InterfazAppInventario(Frame):
 			self.actualizar_conclusion()
 		else:
 			optimo = None
-		print(optimo)
 		for i in range(0, len(self.registros)):
 			registro = self.registros[i]
 			str_registro = "Q= {}, R= {}, Costo= ${}".format(
