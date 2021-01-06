@@ -261,6 +261,7 @@ class Red:
             return self.tiempos[letra] * nodo.costo_electrico
     
     def get_tiempo_total(self):
+   		"""Sólo útil si se ha simulado antes"""
     	tiempo = 0.0
     	for letra in ["a", "b", "c", "d", "e"]:
     		tiempo += self.tiempos[letra]

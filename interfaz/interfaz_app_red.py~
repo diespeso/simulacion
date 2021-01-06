@@ -48,7 +48,7 @@ class InterfazAppRed(Frame):
 
         self.btn_simular = None
         
-        self.txt_conclusion = None
+        self.entry_conclusion = None
 
         self.txt_registros = None
         self.btn_registrar = None
@@ -116,7 +116,7 @@ class InterfazAppRed(Frame):
             column = 3, row = 9, padx = p_x_l, pady = p_y)
             
         ttk.Label(self, text="Conclusión: ").grid(
-            column = 0, row = 10, padx = p_x_l, pady = p_y)
+        	column = 0, row = 10, padx = p_x_l, pady = p_y)
 
     def add_entradas(self):
         self.entry_mb_paquete = ttk.Entry(self, width=w)
@@ -132,8 +132,8 @@ class InterfazAppRed(Frame):
         self.entry_total = ttk.Entry(self, width=w)
         self.entry_total.grid(column = 4, row = 9, padx = p_x_l, pady = p_y)
         
-        self.txt_conclusion = scrolledtext.ScrolledText(self, width=w *7 + 5, height = 2)
-        self.txt_conclusion.grid(column = 1, row = 10, padx = p_x_l, pady = p_y, columnspan = 7)
+        self.entry_conclusion = ttk.Entry(self, width=w *5)
+        self.entry_conclusion.grid(column = 1, row = 10, padx = p_x_l, pady = p_y, columnspan = 5)
 
     def add_interfaz_nodos(self):
         self.interfaz_nodos = {}
@@ -209,7 +209,6 @@ class InterfazAppRed(Frame):
                 self.txt_registros.insert(INSERT, self.get_registro_str(i) + "\n")
         self.txt_registros.tag_config("optimo", foreground="green")
         self.optimo = reg
-        self.add_conclusion()
         #self.txt_registros.insert(INSERT, self.get_registros_str())
 
     def add_registro(self, nodos, costo, tiempo):
@@ -288,18 +287,21 @@ class InterfazAppRed(Frame):
 
         if self.primera_vez:
             self.primera_vez = False
+        self.add_conclusion()
 
     def reiniciar(self):
         self.limpiar()
         self.costo_total = 0.0
 
-    def limpiar(self):
-        if not self.primera_vez:
-            for letra in ["a", "b", "c", "d", "e"]:
-                self.interfaz_nodos[letra]["paquetes"].destroy()
-                self.interfaz_nodos[letra]["tiempo"].destroy()
-            self.entry_total.delete(0, 'end')
-            self.txt_conclusion.delete("1.0", END)
+	def limpiar(self):
+		if not self.primera_vez:
+			for letra in ["a", "b", "c", "d", "e"]:
+				self.interfaz_nodos[letra]["paquetes"].destroy()
+				self.interfaz_nodos[letra]["tiempo"].destroy()
+				#TODO:limpiar entry de total
+			self.entry_total.delete(0, 'end')
+			self.entry_conclusion.delete(0, 'end')
+
     def add_lbl_paquetes(self):
         col = 5
         r = 3
@@ -342,15 +344,10 @@ class InterfazAppRed(Frame):
         self.entry_total.insert(0, "${:.4f}".format(round(self.costo_total, precision)))
 
     def add_conclusion(self):
-        print("optimo: ", self.optimo)
-        if self.optimo:
-            tim = self.optimo["tiempo"]
-            min = tim[0]
-            sec = tim[1]
-
-            nodos = self.optimo["nodos"]
-            txt_nodos = "A: {}, B: {}, C: {}, D: {}, E: {}".format(
-                nodos["a"], nodos["b"], nodos["c"], nodos["d"], nodos["e"])
-            conclusion = "La mejor configuración es {}, con un costo de ${:.4f} y un tiempo de {}min {}s".format(txt_nodos, self.optimo["costo"], min, sec)
-            self.txt_conclusion.insert(INSERT, conclusion)
+    	if self.optimo:
+        	tim = self.optimo["tiempo"]
+        	min = tim[0]
+        	sec = tim[1]
+        	conclusion = "La mejor configuración es {}, con un costo de {:.4f} y un tiempo de {}min {}s".format(self.optimo["nodos"], self.optimo["costo"], min, sec)
+			self.entry_conclusion.insert(0, conclusion)
         
